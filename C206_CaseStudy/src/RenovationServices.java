@@ -22,9 +22,11 @@ public class RenovationServices {
 	}
 
 	public String toString() {
-		String output = String.format("Asset Tag: " + assetTag + " \n Name: " + serviceName + " \n Description: "
-				+ serviceDescription + " \n Contact Hours " + contactHours + " \n Is Available: " + isAvailable);
-		return output;
+	    String output = String.format(
+	        "Asset Tag: %s\nName: %s\nDescription: %s\nContact Hours: %s\nIs Available: %b",
+	        assetTag, serviceName, serviceDescription, contactHours, isAvailable
+	    );
+	    return output;
 	}
 
 	public String getAssetTag() {
@@ -68,3 +70,5 @@ public class RenovationServices {
 	}
 
 }
+
+//Version 5a
