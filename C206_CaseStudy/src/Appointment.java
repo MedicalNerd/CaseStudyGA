@@ -22,7 +22,7 @@ public class Appointment {
 		  return additional_details;
 		}
 
-		public String toStirng() {
+		public String toString() {
 		  String output = super.toString();
 		  output = String.format("Date: " + getDate() + "\n Time: " + getTime() + "\n Additional Details: " + getAdditional_details());
 		  
