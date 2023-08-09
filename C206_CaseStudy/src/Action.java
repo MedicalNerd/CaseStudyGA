@@ -1,11 +1,10 @@
-
 public class Action extends RenovationServices {
     
     private String recipientName;
     private boolean status;
     
     public Action(String assetTag, String recipientName, boolean status) {
-        super(assetTag, "");  // Call the constructor of the superclass with assetTag and an empty serviceName
+        super(assetTag, "");
         this.recipientName = recipientName;
         this.status = status;
     }
@@ -28,6 +27,11 @@ public class Action extends RenovationServices {
     
     @Override
     public String toString() {
-        return super.toString() + String.format("\nRecipient Name: " + recipientName + "\nStatus: " + status);
+        String superToString = super.toString();
+        String output = String.format(
+            "%s\nRecipient Name: %s\nStatus: %b",
+            superToString, recipientName, status
+        );
+        return output;
     }
 }
