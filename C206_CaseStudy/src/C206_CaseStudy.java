@@ -29,13 +29,17 @@ public class C206_CaseStudy {
 
 			if (option == OPTION_VIEW_SERVICE) {
 				// View all services currently available.
+				C206_CaseStudy.viewAllServices(serviceList);
 
 
 			}else if (option == OPTION_CREATE_SERVICE) {
 			   // Create a service.
+				RenovationServices newService = C206_CaseStudy.inputService();
+	            C206_CaseStudy.addService(serviceList, newService);
 			}
 			else if (option == OPTION_DELETE_SERVICE) {
 			  // Delete a service.
+				C206_CaseStudy.deleteServiceMenu(serviceList);
 			}
 			else if (option == OPTION_VIEW_ACTION) {
 			 // Display Appointments and Quotes
@@ -89,7 +93,7 @@ public class C206_CaseStudy {
 	}
 
 	public static void menu() {
-		C206_CaseStudy.setHeader("RESOURCE CENTRE APP");
+		C206_CaseStudy.setHeader("RENOVATION PORTAL APP");
 		System.out.println("1. Display All Services");
 		System.out.println("2. Create a Service");
 		System.out.println("3. Delete a Service");
@@ -117,21 +121,76 @@ public class C206_CaseStudy {
 		}
 		return avail;
 	}
-}
+
 
 	//================================= Option 1 (View Service) =================================
 
 
+public static String retrieveAllServices(ArrayList<RenovationServices> serviceList) {
+    String output = "";
+    for (int i = 0; i < serviceList.size(); i++) {
+        RenovationServices service = serviceList.get(i);
+        output += String.format("%-10s %-30s %-30s %-20s %-10s\n", service.getAssetTag(),
+                service.getServiceName(), service.getDescription(), service.getContactHours(),
+                C206_CaseStudy.showAvailability(service.getAvailability()));
+    }
+    return output;
+}
+public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
+    C206_CaseStudy.setHeader("ALL SERVICES");
+    String output = String.format("%-10s %-30s %-30s %-20s %-10s\n", "ASSET TAG", "SERVICE NAME",
+            "DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
+    output += retrieveAllServices(serviceList);
+    System.out.println(output);
+}
+
+
 	//================================= Option 2 (Add Service) =================================
-	
+
+
+public static RenovationServices inputService() {
+    String assetTag = Helper.readString("Enter asset tag > ");
+    String serviceName = Helper.readString("Enter service name > ");
+    String description = Helper.readString("Enter service description > ");
+    String contactHours = Helper.readString("Enter contact hours > ");
+    boolean isAvailable = Helper.readBoolean("Is the service available? (Yes/No) > ");
+    
+    return new RenovationServices(assetTag, serviceName, description, contactHours, isAvailable);
+}
+
+public static void addService(ArrayList<RenovationServices> serviceList, RenovationServices newService) {
+    serviceList.add(newService);
+    System.out.println("Service added successfully.");
+}
 	
 	//================================= Option 3 (Delete Service)  =================================
 
+
+public static void deleteServiceMenu(ArrayList<RenovationServices> serviceList) {
+    C206_CaseStudy.setHeader("DELETE SERVICE");
+    String assetTag = Helper.readString("Enter asset tag of the service to delete > ");
+    boolean isDeleted = C206_CaseStudy.deleteService(serviceList, assetTag);
+    if (isDeleted) {
+        System.out.println("Service deleted successfully.");
+    } else {
+        System.out.println("Service not found or unable to delete.");
+    }
+}
+public static boolean deleteService(ArrayList<RenovationServices> serviceList, String assetTag) {
+    for (int i = 0; i < serviceList.size(); i++) {
+        RenovationServices service = serviceList.get(i);
+        if (service.getAssetTag().equalsIgnoreCase(assetTag)) {
+            serviceList.remove(i);
+            return true;
+        }
+    }
+    return false;
+}
 	
 	//================================= Option 4 (View Action) =================================
 	
 	//================================= Option 5 (Add Action) =================================
 	
 	//================================= Option 6  (Delete Action) =================================
-
-//version 1
+}
+//version 2
