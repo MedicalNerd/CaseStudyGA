@@ -172,7 +172,7 @@ public class C206_CaseStudy {
 		}
 		return avail;
 	}
-//================================= Add User Validation =================================
+//================================= Option 7  (Add User Validation) =================================
 public static void addUser(ArrayList<User>UserList) {
 	String username = Helper.readString("Enter username here >");
 	String password = Helper.readString("Enter password here >");
@@ -209,7 +209,7 @@ public static void addUser(ArrayList<User>UserList) {
 	
 
 }
-//================================= View User=================================
+//================================= Option 8 (View User) =================================
 public static void viewUser(ArrayList<User>UserList) {
 	String title = String.format("%-10s %-15s ","Username","Email");
 	System.out.println(title);
@@ -220,7 +220,7 @@ public static void viewUser(ArrayList<User>UserList) {
 		
 	}
 }
-//================================= Delete User =================================
+//================================= Option 9 (Delete User0 =================================
 public static boolean deleteUser(ArrayList<User>UserList) {
 	boolean patientfound = false;
 	
@@ -338,42 +338,63 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
 	
 	//================================= Option 6  (Delete Action) =================================
 
-	//================================= Option 10 (View Service Providers) =================================
-	public static void viewServiceProvider(ArrayList<ServiceProvider>ServiceProviderList) {
-		String title = String.format("%-10s %-15s ","Service Provider","Contact Hours");
-		System.out.println(title);
-		for (int i = 0; i < ServiceProviderList.size();i++) {
-			String ServiceProvider = String.format("%-10s %-15s ",ServiceProviderList.get(i).getServiceProvider(),ServiceProviderList.get(i).getServiceProviderContactHours());
-			System.out.println(ServiceProvider);
-	
-			
+//================================= Option 10 (View Service Providers) =================================
+	public static String retrieveAllServiceProvider(ArrayList<ServiceProvider> ServiceProviderList) {
+		String output = "";
+
+		for (int i = 0; i < ServiceProviderList.size(); i++) {
+				output += String.format("%-10s %-30s", ServiceProviderList.get(i).getServiceProvider(),
+				ServiceProviderList.get(i).getServiceProviderContactHours());
 		}
+		return output;
 	}
 
+	public static void viewAllServiceProvider(ArrayList<ServiceProvider> ServiceProviderList) {
+		C206_CaseStudy.setHeader("SERVICE PROVIDER LIST");
+		String output = String.format("%-10s %-30s\n","Service Provider","Contact Hours");
+		 output += retrieveAllServiceProvider(ServiceProviderList);	
+		System.out.println(output);
+	}
+
+
+
 	//================================= Option 11 (Add Service Provider) =================================
-	public static void addServiceProvider(ArrayList<ServiceProvider>ServiceProviderList) {
-		String spName = Helper.readString("Enter Service Provider name here >");
-		String spContactHours = Helper.readString("Enter contact hours here >");
-		
-		if (!spName.isEmpty()) {
-			ServiceProvider newSP = new ServiceProvider(spName,spContactHours);			
-			ServiceProviderList.add(newSP);
-			System.out.println("*** Service Provider added successfully ***");
-			
+	public static ServiceProvider inputServiceProvider() {
+		String name = Helper.readString("Enter asset tag > ");
+		String hours = Helper.readString("Enter description > ");
+
+
+
+		ServiceProvider sp= new ServiceProvider(name, hours);
+		return sp;
+
+	}
+	public static void addServiceProvider(ArrayList<ServiceProvider> ServiceProviderList, ServiceProvider sp) {
+		ServiceProvider spro;
+		for(int i = 0; i < ServiceProviderList.size(); i++) {
+			spro = ServiceProviderList.get(i);
+			if (spro.getServiceProvider().equalsIgnoreCase(sp.getServiceProvider()) )
+				return;
 		}
-		else 
-			System.out.println("*** Service Provider already exists! ***");
+		if ((sp.getServiceProvider().isEmpty()) || (sp.getServiceProvider().isEmpty()) ) {
+			return;
 		}
-		
+
+		ServiceProviderList.add(sp);
+	}
+
+
+
 	
 	//================================= Option 12  (Delete Service Provider) =================================
+
 	public static boolean deleteServiceProvider(ArrayList<ServiceProvider>ServiceProviderList) {
 		boolean spFound = false;
-		
+
 		String spname = Helper.readString("Enter Service Provider Name > ");
 		for (int i = 0; i < ServiceProviderList.size();i++) {
 			if(ServiceProviderList.get(i).getServiceProvider().equals(spname)) {
-				
+
 				String check = Helper.readString("Are you sure you want to delete service provider? (Y/N) > ");
 				 if(check.equals("Y")) {
 					 ServiceProviderList.remove(i);
@@ -384,17 +405,19 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
 				 else {
 					 System.out.println("Delete Service Provider not successful!");
 				 }
-				
-				
-				
+
+
+
 			}
 			else {
 				System.out.println("Service Provider not found");
 			}
-			
+
+
+
 
 		}
-		
+
 		return spFound;
 	}
 }
