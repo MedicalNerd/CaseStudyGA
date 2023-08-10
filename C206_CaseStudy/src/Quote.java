@@ -4,7 +4,7 @@ public class Quote extends Action {
     private int contactNumber;
     private String description;
     
-    public Quote(String assetTag, String recipientName, boolean status, int contactNumber, String description) {
+    public Quote(String assetTag, String recipientName, String status, int contactNumber, String description) {
         super(assetTag, recipientName, status);
         this.contactNumber = contactNumber;
         this.description = description;

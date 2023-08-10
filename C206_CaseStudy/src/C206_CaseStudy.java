@@ -18,7 +18,8 @@ public class C206_CaseStudy {
 	private static final int OPTION_VIEW_SERVICEPROVIDER = 10; //ara
 	private static final int OPTION_CREATE_SERVICEPROVIDER = 11;
 	private static final int OPTION_DELETE_SERVICEPROVIDER = 12;
-	private static final int OPTION_QUIT = 13;
+	private static final int OPTION_MANAGE_REQUESTS = 13;
+	private static final int OPTION_QUIT = 14;
 	
 	public static void main(String[] args)  {
 
@@ -37,10 +38,10 @@ public class C206_CaseStudy {
 		UserList.add(new User("Tom","Password12@","Tom@gmail.com"));
 		UserList.add(new User("Mary","Password@12","Mary@gmail.com"));
 		UserList.add(new User("Kafka","YES123@oo","Mommy@gmail.com"));
-		appointmentList.add(new Appointment("AP1","Kafka",true, "2023-07-25", "10.00","Johns House Renos"));
-		appointmentList.add(new Appointment("AP2","Mary",true, "2023-07-25", "11.00","Daisy Lawn Renos"));
-		quoteList.add(new Quote("Q1", "John", true, 12345678, "House renovation quote"));
-		quoteList.add(new Quote("Q2", "Jane", true, 98765432, "Lawn renovation quote"));
+		appointmentList.add(new Appointment("AP1","Kafka","Pending", "2023-07-25", "10.00","Johns House Renos"));
+		appointmentList.add(new Appointment("AP2","Mary","Pending", "2023-07-25", "11.00","Daisy Lawn Renos"));
+		quoteList.add(new Quote("Q1", "John", "Approved", 12345678, "House renovation quote"));
+		quoteList.add(new Quote("Q2", "Jane", "Pending", 98765432, "Lawn renovation quote"));
 
 		int option = 0;
 		while (option != OPTION_QUIT) {
@@ -144,6 +145,9 @@ public class C206_CaseStudy {
 			  // Delete a service providers.
 				C206_CaseStudy.deleteServiceProvider(ServiceProviderList);
 			}
+			else if (option == OPTION_MANAGE_REQUESTS) {
+				  // Manage pending requests.
+				}
 			else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
 			} else {
@@ -169,7 +173,8 @@ public class C206_CaseStudy {
 		System.out.println("10. Display All Service Providers");
 		System.out.println("11. Create a Service Provider");
 		System.out.println("12. Delete a Service Provider");
-		System.out.println("13. Quit");
+		System.out.println("13. Manage Requests");
+		System.out.println("14. Quit");
 		Helper.line(80, "-");
 
 	}
@@ -359,7 +364,7 @@ public static String retrieveQuotes(ArrayList<Quote> quoteList) {
   String output = "";
   for (int i = 0; i < quoteList.size(); i++) {
       Quote quote = quoteList.get(i);
-      output += String.format("%-10s %-15s %-30s %-15d %s%n",
+      output += String.format("%-10s %-15s %-23s %-15d %s%n",
               quote.getAssetTag(), quote.getRecipientName(), quote.getStatus(), quote.getContactNumber(), quote.getDescription());
   }
   return output;
@@ -368,7 +373,7 @@ public static String retrieveQuotes(ArrayList<Quote> quoteList) {
 public static void viewQuotes(ArrayList<Quote> quoteList) {
   C206_CaseStudy.setHeader("VIEW QUOTES");
   
-  String output = String.format("%-10s %-15s %-30s %-15s %s%n",
+  String output = String.format("%-10s %-15s %-23s %-15s %s%n",
           "QUOTE ID", "RECIPIENT", "AVAILABILITY", "CONTACT NUMBER", "DESCRIPTION");
   
   output += retrieveQuotes(quoteList);
@@ -385,7 +390,7 @@ public static void viewQuotes(ArrayList<Quote> quoteList) {
       String date = Helper.readString("Enter appointment date > ");
       String time = Helper.readString("Enter appointment time > ");
       String serviceName = Helper.readString("Enter service name > ");
-      boolean status = Helper.readBoolean("Enter status of Appointment [Yes/No] > " );
+      String status = "Pending";
     
     return new Appointment(assertTag, recipientName, status, date, time, serviceName );
     
@@ -532,4 +537,8 @@ public static void viewQuotes(ArrayList<Quote> quoteList) {
 		return spFound;
 	}
 }
+
+//================================= Option 13  (Manage Requests) =================================
+
+
 //version 3
