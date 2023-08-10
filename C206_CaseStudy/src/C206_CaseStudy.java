@@ -15,23 +15,26 @@ public class C206_CaseStudy {
 	private static final int OPTION_ADDUSER = 7;
 	private static final int OPTION_VIEWUSERS = 8;
 	private static final int OPTION_DELETEUSERS = 9;
-	private static final int OPTION_QUIT = 10;
-	
-	public static void main(String[] args) {
+	private static final int OPTION_VIEW_SERVICEPROVIDER = 10; //ara
+	private static final int OPTION_CREATE_SERVICEPROVIDER = 11;
+	private static final int OPTION_DELETE_SERVICEPROVIDER = 12;
+	private static final int OPTION_QUIT = 13;
 
 		ArrayList<RenovationServices> serviceList = new ArrayList<RenovationServices>();
 
 		ArrayList<User> UserList = new ArrayList<User>();
-
+		ArrayList<ServiceProvider> ServiceProviderList = new ArrayList<ServiceProvider>();
 		ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
 
+
+		serviceList.add(new RenovationServices("SA1", "Johns House Renos","House Renovation","Specialises in House Renovation","09:00 to 18:00",true));
+		serviceList.add(new RenovationServices("SA1","Johns House Renos", "House Renovation","Specialises in House Renovation","09:00 to 18:00",true));
+		serviceList.add(new RenovationServices("SA2","Daisy Lawn Renos", "Lawn Renovation","Specialises in Lawn Renovation","08:00 to 18:00",true));
+		ServiceProviderList.add(new ServiceProvider("Johns House Renos", "09:00 to 18:00"));
+		ServiceProviderList.add(new ServiceProvider("Daisy Lawn Renos", "09:00 to 18:00"));
 		UserList.add(new User("Tom","Password12@","Tom@gmail.com"));
 		UserList.add(new User("Mary","Password@12","Mary@gmail.com"));
 		UserList.add(new User("Kafka","YES123@oo","Mommy@gmail.com"));
-		serviceList.add(new RenovationServices("SA1","House Renovation","Specialises in House Renovation","09:00 to 18:00",true));
-		serviceList.add(new RenovationServices("SA2","Lawn Renovation","Specialises in Lawn Renovation","08:00 to 18:00",true));
-		
-		
 
 		int option = 0;
 
@@ -99,8 +102,7 @@ public class C206_CaseStudy {
 					System.out.println("Invalid type");
 				}
 
-			}
-			else if(option == OPTION_ADDUSER){
+			}else if(option == OPTION_ADDUSER){
 				addUser(UserList);
 			}
 			else if(option == OPTION_VIEWUSERS){
@@ -108,6 +110,18 @@ public class C206_CaseStudy {
 			}
 			else if(option == OPTION_DELETEUSERS){
 				deleteUser(UserList);
+			}else if(option == OPTION_VIEW_SERVICEPROVIDER) {
+				// View all services providers currently available.
+				C206_CaseStudy.viewAllServiceProviders(serviceProviderList);
+
+			}else if (option == OPTION_CREATE_SERVICEPROVIDER) {
+			   // Create a service provider.
+				ServiceProvider newServiceProvider = C206_CaseStudy.inputServiceProvider();
+	            C206_CaseStudy.addServiceProvider(serviceList, newServiceProvider);
+			}
+			else if (option == OPTION_DELETE_SERVICEPROVIDER) {
+			  // Delete a service providers.
+				C206_CaseStudy.deleteServiceProvider(serviceProviderList);
 			}
 			else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
@@ -127,11 +141,18 @@ public class C206_CaseStudy {
 		System.out.println("4. View all Appointments/Quotes");
 		System.out.println("5. Make an Appointment/Quote");
 		System.out.println("6. Delete an Appointment/Quote");
+<<<<<<< HEAD
+		System.out.println("7. Display All Service Providers");
+		System.out.println("8. Create a Service Provider");
+		System.out.println("9. Delete a Service Provider");
+		System.out.println("10. Quit");
+=======
 		System.out.println("7. Add User");
 		System.out.println("8. View User");
 		System.out.println("9. Delete User");
 		System.out.println("10. Quit");
 	//YL
+>>>>>>> branch 'master' of https://github.com/MedicalNerd/CaseStudyGA.git
 		Helper.line(80, "-");
 
 	}
@@ -254,16 +275,16 @@ public static String retrieveAllServices(ArrayList<RenovationServices> serviceLi
     String output = "";
     for (int i = 0; i < serviceList.size(); i++) {
         RenovationServices service = serviceList.get(i);
-        output += String.format("%-10s %-30s %-30s %-20s %-10s\n", service.getAssetTag(),
-                service.getServiceName(), service.getDescription(), service.getContactHours(),
-                C206_CaseStudy.showAvailability(service.getAvailability()));
+        output += String.format("%-20s %-40s %-20s %-10s %-20s %-40s %-10s\n",service.getServiceProvider(),service.getServiceProviderDescription(),service.getServiceProviderContactHours(), service.getAssetTag(),
+                service.getServiceName(), service.getServiceDescription(),
+                C206_CaseStudy.showAvailability(service.isAvailable()));
     }
     return output;
 }
 public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
     C206_CaseStudy.setHeader("ALL SERVICES");
-    String output = String.format("%-10s %-30s %-30s %-20s %-10s\n", "ASSET TAG", "SERVICE NAME",
-            "DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
+    String output = String.format("%-20s %-40s %-20s %-10s %-20s %-40s %-10s\\n","PROVIDER","PROVIDER DESCRIPTION", "CONTACT HOURS", "ASSET TAG", "SERVICE NAME",
+            "DESCRIPTION", "AVAILABLE");
     output += retrieveAllServices(serviceList);
     System.out.println(output);
 }
@@ -273,13 +294,15 @@ public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
 
 
 public static RenovationServices inputService() {
-    String assetTag = Helper.readString("Enter asset tag > ");
+	  String serviceProvider = Helper.readString("Enter asset tag > ");
+	  String serviceDesc = Helper.readString("Enter asset tag > ");
+	  String serviceHours = Helper.readString("Enter asset tag > ");
+	String assetTag = Helper.readString("Enter asset tag > ");
     String serviceName = Helper.readString("Enter service name > ");
     String description = Helper.readString("Enter service description > ");
-    String contactHours = Helper.readString("Enter contact hours > ");
     boolean isAvailable = Helper.readBoolean("Is the service available? (Yes/No) > ");
     
-    return new RenovationServices(assetTag, serviceName, description, contactHours, isAvailable);
+    return new RenovationServices(serviceProvider, serviceDesc, serviceHours, assetTag, serviceName, description, isAvailable);
 }
 
 public static void addService(ArrayList<RenovationServices> serviceList, RenovationServices newService) {
@@ -316,5 +339,65 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
 	//================================= Option 5 (Add Action) =================================
 	
 	//================================= Option 6  (Delete Action) =================================
+
+	//================================= Option 10 (View Service Providers) =================================
+	public static void viewServiceProvider(ArrayList<ServiceProvider>ServiceProviderList) {
+		String title = String.format("%-10s %-15s ","Service Provider","Contact Hours");
+		System.out.println(title);
+		for (int i = 0; i < ServiceProviderList.size();i++) {
+			String ServiceProvider = String.format("%-10s %-15s ",ServiceProviderList.get(i).getServiceProvider(),ServiceProviderList.get(i).getServiceProviderContactHours());
+			System.out.println(ServiceProvider);
+	
+			
+		}
+	}
+
+	//================================= Option 11 (Add Service Provider) =================================
+	public static void addServiceProvider(ArrayList<ServiceProvider>ServiceProviderList) {
+		String spName = Helper.readString("Enter Service Provider name here >");
+		String spContactHours = Helper.readString("Enter contact hours here >");
+		
+		if (!spName.isEmpty()) {
+			ServiceProvider newSP = new ServiceProvider(spName,spContactHours);			
+			ServiceProviderList.add(newSP);
+			System.out.println("*** Service Provider added successfully ***");
+			
+		}
+		else 
+			System.out.println("*** Service Provider already exists! ***");
+		}
+		
+	
+	//================================= Option 12  (Delete Service Provider) =================================
+	public static boolean deleteServiceProvider(ArrayList<ServiceProvider>ServiceProviderList) {
+		boolean spFound = false;
+		
+		String spname = Helper.readString("Enter Service Provider Name > ");
+		for (int i = 0; i < ServiceProviderList.size();i++) {
+			if(ServiceProviderList.get(i).getServiceProvider().equals(spname)) {
+				
+				String check = Helper.readString("Are you sure you want to delete service provider? (Y/N) > ");
+				 if(check.equals("Y")) {
+					 ServiceProviderList.remove(i);
+					 System.out.println("Service Provider is successfully deleted!");
+					 spFound = true;
+					 break;
+				 }
+				 else {
+					 System.out.println("Delete Service Provider not successful!");
+				 }
+				
+				
+				
+			}
+			else {
+				System.out.println("Service Provider not found");
+			}
+			
+
+		}
+		
+		return spFound;
+	}
 }
 //version 2
