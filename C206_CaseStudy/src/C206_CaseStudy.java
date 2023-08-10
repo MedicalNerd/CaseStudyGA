@@ -447,7 +447,7 @@ public static void viewQuotes(ArrayList<Quote> quoteList) {
 
 		}
 
-		return spFound;
+		return apFound;
 	}
 		
     
