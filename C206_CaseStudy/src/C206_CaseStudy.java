@@ -17,10 +17,11 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 
 		ArrayList<RenovationServices> serviceList = new ArrayList<RenovationServices>();
+		ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
 
-
-		serviceList.add(new RenovationServices("SA1","House Renovation","Specialises in House Renovation","09:00 to 18:00",true));
-		serviceList.add(new RenovationServices("SA2","Lawn Renovation","Specialises in Lawn Renovation","09:00 to 18:00",true));
+		serviceList.add(new RenovationServices("Provider1","House Company","09:00 to 18:00","SA1","House Renovation","Specialises in House Renovation",true));
+		serviceList.add(new RenovationServices("Provider2","Lawn Company","05:00 to 18:00","SA2","Lawn Renovation","Specialises in Lawn Renovation",true));
+		
 
 		int option = 0;
 
@@ -54,6 +55,9 @@ public class C206_CaseStudy {
 
 				if (itemType == ACTION_TYPE_APPOINTMENT) {
 					// Add an appointment.
+					Appointment ap = inputAppointment();
+					C206_CaseStudy.createAppointment(appointmentList, ap);
+					System.out.println("Appointment scheduled");
 
 
 				} else if (itemType == ACTION_TYPE_QUOTE) {
@@ -72,6 +76,9 @@ public class C206_CaseStudy {
 
 				if (itemType == ACTION_TYPE_APPOINTMENT) {
 					// Delete an appointment.
+					Appointment ap= inputAppointment();
+					C206_CaseStudy.deleteAppointment(appointmentList, ap);
+					System.out.println("Appointment deleted")
 
 
 				} else if (itemType == ACTION_TYPE_QUOTE) {
@@ -132,16 +139,16 @@ public static String retrieveAllServices(ArrayList<RenovationServices> serviceLi
     String output = "";
     for (int i = 0; i < serviceList.size(); i++) {
         RenovationServices service = serviceList.get(i);
-        output += String.format("%-10s %-20s %-40s %-20s %-10s\n", service.getAssetTag(),
-                service.getServiceName(), service.getDescription(), service.getContactHours(),
-                C206_CaseStudy.showAvailability(service.getAvailability()));
+        output += String.format("%-20s %-40s %-20s %-10s %-20s %-40s %-10s\n",service.getServiceProvider(),service.getServiceProviderDescription(),service.getServiceProviderContactHours(), service.getAssetTag(),
+                service.getServiceName(), service.getServiceDescription(),
+                C206_CaseStudy.showAvailability(service.isAvailable()));
     }
     return output;
 }
 public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
     C206_CaseStudy.setHeader("ALL SERVICES");
-    String output = String.format("%-10s %-20s %-40s %-20s %-10s\n", "ASSET TAG", "SERVICE NAME",
-            "DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
+    String output = String.format("%-20s %-40s %-20s %-10s %-20s %-40s %-10s\\n","PROVIDER","PROVIDER DESCRIPTION", "CONTACT HOURS", "ASSET TAG", "SERVICE NAME",
+            "DESCRIPTION", "AVAILABLE");
     output += retrieveAllServices(serviceList);
     System.out.println(output);
 }
@@ -151,13 +158,15 @@ public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
 
 
 public static RenovationServices inputService() {
-    String assetTag = Helper.readString("Enter asset tag > ");
+	  String serviceProvider = Helper.readString("Enter asset tag > ");
+	  String serviceDesc = Helper.readString("Enter asset tag > ");
+	  String serviceHours = Helper.readString("Enter asset tag > ");
+	String assetTag = Helper.readString("Enter asset tag > ");
     String serviceName = Helper.readString("Enter service name > ");
     String description = Helper.readString("Enter service description > ");
-    String contactHours = Helper.readString("Enter contact hours > ");
     boolean isAvailable = Helper.readBoolean("Is the service available? (Yes/No) > ");
     
-    return new RenovationServices(assetTag, serviceName, description, contactHours, isAvailable);
+    return new RenovationServices(serviceProvider, serviceDesc, serviceHours, assetTag, serviceName, description, isAvailable);
 }
 
 public static void addService(ArrayList<RenovationServices> serviceList, RenovationServices newService) {
