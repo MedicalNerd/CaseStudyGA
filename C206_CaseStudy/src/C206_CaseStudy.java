@@ -61,6 +61,21 @@ public class C206_CaseStudy {
 			}
 			else if (option == OPTION_VIEW_ACTION) {
 			 // Display Appointments and Quotes
+				int itemType = Helper.readInt("Appointment[1] or Quote[2]? > ");
+				
+				if (itemType == ACTION_TYPE_APPOINTMENT) {
+					// View all appointment.
+					
+
+
+				} else if (itemType == ACTION_TYPE_QUOTE) {
+					// View all quote.
+
+
+				} else {
+					System.out.println("Invalid type");
+				}
+				
 			}
 			else if (option == OPTION_ADD_ACTION) {
 				// 
@@ -93,6 +108,8 @@ public class C206_CaseStudy {
 					// Delete an appointment.
 					Appointment ap= inputAppointment();
 					C206_CaseStudy.createAppointment(appointmentList, ap);
+					Appointment ap = inputAppointment();
+					C206_CaseStudy.deleteAppointment(appointmentList, ap);
 					System.out.println("Appointment deleted");
 
 
@@ -144,18 +161,17 @@ public class C206_CaseStudy {
 		System.out.println("4. View all Appointments/Quotes");
 		System.out.println("5. Make an Appointment/Quote");
 		System.out.println("6. Delete an Appointment/Quote");
-		System.out.println("7. Display All Service Providers");
-		System.out.println("8. Create a Service Provider");
-		System.out.println("9. Delete a Service Provider");
-		System.out.println("10. Quit");
 		System.out.println("7. Add User");
 		System.out.println("8. View User");
 		System.out.println("9. Delete User");
-		System.out.println("10. Quit");
+		System.out.println("10. Display All Service Providers");
+		System.out.println("11. Create a Service Provider");
+		System.out.println("12. Delete a Service Provider");
+		System.out.println("13. Quit");
 		Helper.line(80, "-");
 
 	}
-	
+
 	public static void setHeader(String header) {
 		Helper.line(80, "-");
 		System.out.println(header);
@@ -172,6 +188,7 @@ public class C206_CaseStudy {
 		}
 		return avail;
 	}
+
 //================================= Option 7  (Add User Validation) =================================
 public static void addUser(ArrayList<User>UserList) {
 	String username = Helper.readString("Enter username here >");
@@ -206,8 +223,6 @@ public static void addUser(ArrayList<User>UserList) {
 			System.out.println("Enter valid Password Format and a Username!");
 		}
 	}
-	
-
 }
 //================================= Option 8 (View User) =================================
 public static void viewUser(ArrayList<User>UserList) {
@@ -259,15 +274,13 @@ public static boolean deleteUser(ArrayList<User>UserList) {
 	return patientfound;
 }
 	//================================= Option 1 (View Service) =================================
-
-
 public static String retrieveAllServices(ArrayList<RenovationServices> serviceList) {
     String output = "";
     for (int i = 0; i < serviceList.size(); i++) {
         RenovationServices service = serviceList.get(i);
-        output += String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n",service.getAssetTag(),service.getServiceProvider(),service.getServiceName(), service.getServiceDescription(),
-               service.getServiceProviderContactHours(),
-                C206_CaseStudy.showAvailability(service.isAvailable()));
+        output += String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n",service.getAssetTag(),service.getServiceProvider(),service.getServiceName(), service.getDescription(),
+               service.getContactHours(),
+                C206_CaseStudy.showAvailability(service.getAvailability()));
     }
     return output;
 }
@@ -278,29 +291,23 @@ public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
     System.out.println(output);
 }
 
-
-	//================================= Option 2 (Add Service) =================================
-
-
 public static RenovationServices inputService() {
 	String assetTag = Helper.readString("Enter ServiceID > ");
-	  String serviceProvider = Helper.readString("Enter Service provider > ");
+	String serviceProvider = Helper.readString("Enter service provider > ");
     String serviceName = Helper.readString("Enter service name > ");
 	  String serviceHours = Helper.readString("Enter Service hours > ");
     String description = Helper.readString("Enter service description > ");
     boolean isAvailable = Helper.readBoolean("Is the service available? (Yes/No) > ");
     
-    return new RenovationServices(assetTag, serviceProvider, serviceName,serviceHours,description, isAvailable);
+    return new RenovationServices(assetTag,serviceProvider,serviceName, description,serviceHours,isAvailable);
 }
 
-public static void addService(ArrayList<RenovationServices> serviceList, RenovationServices newService) {
-    serviceList.add(newService);
+public static void addService(ArrayList<RenovationServices> serviceList, RenovationServices inputService) {
+    serviceList.add(inputService);
     System.out.println("Service added successfully.");
 }
 	
 	//================================= Option 3 (Delete Service)  =================================
-
-
 public static void deleteServiceMenu(ArrayList<RenovationServices> serviceList) {
     C206_CaseStudy.setHeader("DELETE SERVICE");
     String assetTag = Helper.readString("Enter asset tag of the service to delete > ");
@@ -322,8 +329,22 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
     return false;
 }
 	
-	//================================= Option 4 (View all Actions (Appointments and Quotes)) =================================
-	
+	//================================= Option 4 (View Action) =================================
+public static String retrieveAction(ArrayList<Action> actionList) {
+	String output = "";	
+	for (int i = 0; i < actionList.size(); i++) {
+		output += String.format("%-10s %-30s", actionList.get(i).getRecipientName(),
+				actionList.get(i).getStatus());
+}
+return output;
+}
+
+public static void viewAllAction(ArrayList<Action> actionList) {
+C206_CaseStudy.setHeader("ACTION LIST");
+String output = String.format("%-10s %-30s\n","Recipent Name","Status");
+ output += retrieveAction(actionList);	
+System.out.println(output);
+}
 	//================================= Option 5a (Add Appointment) =================================
     public static Appointment inputAppointment() {
 	  String assertTag = Helper.readString("Enter assert tag > ");
@@ -331,8 +352,7 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
       String date = Helper.readString("Enter appointment date > ");
       String time = Helper.readString("Enter appointment time > ");
       String serviceName = Helper.readString("Enter service name > ");
-      boolean status = Helper.readBoolean("Enter status of appointment[Yes/No] >");
-      
+      boolean status = Helper.readBoolean("Enter status of Appointment [Yes/No] > " );
     
     return new Appointment(assertTag, recipientName, status, date, time, serviceName );
     
@@ -355,11 +375,11 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
         
         appointmentList.add(appointment);
     }
-  //================================= Option 5b (Add Quote) =================================
-	
+  //================================= Option 5b  (Add Quote) =================================
+    
 	//================================= Option 6a  (Delete Appointment) =================================
     
-  //================================= Option 6b  (Delete Quote =================================
+	//================================= Option 6b  (Delete Quote) =================================
 
 //================================= Option 10 (View Service Providers) =================================
 	public static String retrieveAllServiceProvider(ArrayList<ServiceProvider> ServiceProviderList) {

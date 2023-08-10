@@ -4,11 +4,10 @@ public class Action extends RenovationServices {
     private boolean status;
     
     public Action(String assetTag, String recipientName, boolean status) {
-        super(assetTag, "", "", "", "", false);
+        super(assetTag, "","");
         this.recipientName = recipientName;
         this.status = status;
     }
-
     
     public String getRecipientName() {
         return recipientName;
