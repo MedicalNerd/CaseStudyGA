@@ -12,10 +12,11 @@ public class C206_CaseStudy {
 	private static final int OPTION_VIEW_ACTION = 4;
 	private static final int OPTION_ADD_ACTION = 5;
 	private static final int OPTION_DELETE_ACTION = 6;
-	private static final int OPTION_QUIT = 7;
-	private static final int OPTION_ADD = 8;
-	private static final int OPTION_VIEWUSERS = 9;
-	private static final int OPTION_DELETEUSERS = 10;
+	private static final int OPTION_ADDUSER = 7;
+	private static final int OPTION_VIEWUSERS = 8;
+	private static final int OPTION_DELETEUSERS = 9;
+	private static final int OPTION_QUIT = 10;
+	
 	public static void main(String[] args) {
 
 		ArrayList<RenovationServices> serviceList = new ArrayList<RenovationServices>();
@@ -83,7 +84,7 @@ public class C206_CaseStudy {
 				}
 
 			}
-			else if(option == OPTION_ADD){
+			else if(option == OPTION_ADDUSER){
 				addUser(UserList);
 			}
 			else if(option == OPTION_VIEWUSERS){
@@ -110,10 +111,11 @@ public class C206_CaseStudy {
 		System.out.println("4. View all Appointments/Quotes");
 		System.out.println("5. Make an Appointment/Quote");
 		System.out.println("6. Delete an Appointment/Quote");
-		System.out.println("7. Quit");
-		System.out.println("8. Add User");
-		System.out.println("9. View User");
-		System.out.println("10. Delete User");
+		System.out.println("7. Add User");
+		System.out.println("8. View User");
+		System.out.println("9. Delete User");
+		System.out.println("10. Quit");
+	
 		Helper.line(80, "-");
 
 	}
@@ -176,8 +178,6 @@ public static void viewUser(ArrayList<User>UserList) {
 	System.out.println(title);
 	for (int i = 0; i < UserList.size();i++) {
 		String Userheader = String.format("%-10s %-15s ",UserList.get(i).getUsername(),UserList.get(i).getEmail());
-		
-		
 		System.out.println(Userheader);
 
 		
@@ -199,8 +199,9 @@ public static boolean deleteUser(ArrayList<User>UserList) {
 			String check = Helper.readString("Are you sure you want to delete/deactivate your account? (Y/N) > ");
 			 if(check.equals("Y")) {
 				 UserList.remove(i);
+				 System.out.println("User Account is successfully deleted!");
 				 patientfound = true;
-					break;
+				 break;
 			 }
 			 else {
 				 System.out.println("Delete User not successful!");
