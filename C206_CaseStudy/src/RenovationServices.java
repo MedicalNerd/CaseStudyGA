@@ -6,8 +6,8 @@ public class RenovationServices extends ServiceProvider{ // ara
 	private String serviceDescription;
 	private boolean isAvailable;
 
-	public RenovationServices(String serviceProvider, String contactHours, String assetTag, String serviceName, String serviceDescription, boolean isAvailable) {
-		super(serviceProvider, contactHours, serviceDescription);
+	public RenovationServices(String serviceProvider, String serviceProviderDescription, String serviceProviderContactHours, String assetTag, String serviceName, String serviceDescription, boolean isAvailable) {
+		super(serviceProvider, serviceProviderDescription, serviceProviderContactHours);
 		this.assetTag = assetTag;
 		this.serviceName = serviceName;
 		this.serviceDescription = serviceDescription;
