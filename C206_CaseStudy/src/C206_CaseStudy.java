@@ -132,7 +132,7 @@ public static String retrieveAllServices(ArrayList<RenovationServices> serviceLi
     String output = "";
     for (int i = 0; i < serviceList.size(); i++) {
         RenovationServices service = serviceList.get(i);
-        output += String.format("%-10s %-30s %-30s %-20s %-10s\n", service.getAssetTag(),
+        output += String.format("%-10s %-20s %-40s %-20s %-10s\n", service.getAssetTag(),
                 service.getServiceName(), service.getDescription(), service.getContactHours(),
                 C206_CaseStudy.showAvailability(service.getAvailability()));
     }
@@ -140,7 +140,7 @@ public static String retrieveAllServices(ArrayList<RenovationServices> serviceLi
 }
 public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
     C206_CaseStudy.setHeader("ALL SERVICES");
-    String output = String.format("%-10s %-30s %-30s %-20s %-10s\n", "ASSET TAG", "SERVICE NAME",
+    String output = String.format("%-10s %-20s %-40s %-20s %-10s\n", "ASSET TAG", "SERVICE NAME",
             "DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
     output += retrieveAllServices(serviceList);
     System.out.println(output);

@@ -16,28 +16,33 @@ public class C206_CaseStudyTest {
 	private ArrayList<RenovationServices> serviceList;
 
     @Before
-    void setUp() {
+   public void setUp() {
     	//Set up examples for the test cases.
         serviceList = new ArrayList<>();
         sa1 = new RenovationServices("SA1", "House Renovation", "Specialises in House Renovation",
                 "09:00 to 18:00", true);
         sa2 = new RenovationServices("SA2", "Lawn Renovation", "Specialises in Lawn Renovation",
                 "09:00 to 18:00", true);
+        
+        serviceList.add(sa1);
+        serviceList.add(sa2);
     }
 
     @Test
-    void testViewAllServices() {
+    public void testViewAllServices() {
     	//Create the output that  is expected to be printed out.
-        String expectedOutput = String.format("%-10s %-30s %-30s %-20s %s\n", "ASSET TAG", "SERVICE NAME",
+        String expectedOutput = String.format("%-10s %-20s %-40s %-20s %s\n", "ASSET TAG", "SERVICE NAME",
                 "SERVICE DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
-        expectedOutput += String.format("%-10s %-30s %-30s %-20s %s\n", "SA1", "House Renovation",
-                "Specialises in House Renovation", "09:00 to 18:00", "Yes");
+        expectedOutput += String.format("%-10s %-20s %-40s %-20s %s\n", "SA1", "House Renovation",
+                "Specialises in House Renovation", "09:00 to 18:00", "Yes");   
+        expectedOutput += String.format("%-10s %-20s %-40s %-20s %s\n", "SA2", "Lawn Renovation",
+                "Specialises in Lawn Renovation", "09:00 to 18:00", "Yes");
         //See if if the output actually generated matches with the expected.
         assertEquals(expectedOutput, C206_CaseStudy.retrieveAllServices(serviceList));
     }
 
     @Test
-    void testAddService() {
+    public void testAddService() {
     	//Add a service as an example.
         RenovationServices newService = new RenovationServices("SA3", "Bathroom Renovation",
                 "Specialises in Bathroom Renovation", "10:00 to 19:00", true);
@@ -50,7 +55,7 @@ public class C206_CaseStudyTest {
     }
 
     @Test
-    void testDeleteService() {
+    public void testDeleteService() {
     	//Delete a service as an example.
         boolean isDeleted = C206_CaseStudy.deleteService(serviceList, "SA2");
         assertTrue(isDeleted);
