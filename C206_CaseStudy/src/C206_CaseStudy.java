@@ -13,11 +13,13 @@ public class C206_CaseStudy {
 	private static final int OPTION_ADD_ACTION = 5;
 	private static final int OPTION_DELETE_ACTION = 6;
 	private static final int OPTION_QUIT = 7;
-
+	private static final int OPTION_ADD = 8;
+	private static final int OPTION_VIEWUSERS = 9;
+	private static final int OPTION_DELETEUSERS = 10;
 	public static void main(String[] args) {
 
 		ArrayList<RenovationServices> serviceList = new ArrayList<RenovationServices>();
-
+		ArrayList<User> UserList = new ArrayList<User>();
 		serviceList.add(new RenovationServices("SA1","House Renovation","Specialises in House Renovation","09:00 to 18:00",true));
 
 		int option = 0;
@@ -81,7 +83,15 @@ public class C206_CaseStudy {
 				}
 
 			}
-			
+			else if(option == OPTION_ADD){
+				addUser(UserList);
+			}
+			else if(option == OPTION_VIEWUSERS){
+				viewUser(UserList);
+			}
+			else if(option == OPTION_DELETEUSERS){
+				deleteUser(UserList);
+			}
 			else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
 			} else {
@@ -101,6 +111,9 @@ public class C206_CaseStudy {
 		System.out.println("5. Make an Appointment/Quote");
 		System.out.println("6. Delete an Appointment/Quote");
 		System.out.println("7. Quit");
+		System.out.println("8. Add User");
+		System.out.println("9. View User");
+		System.out.println("10. Delete User");
 		Helper.line(80, "-");
 
 	}
@@ -121,8 +134,92 @@ public class C206_CaseStudy {
 		}
 		return avail;
 	}
+//================================= Add User Validation =================================
+public static void addUser(ArrayList<User>UserList) {
+	String username = Helper.readString("Enter username here >");
+	String password = Helper.readString("Enter password here >");
+	String email = Helper.readString("Enter email here >");
+	String regex = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-zA-Z])|(?=.{8,})(?=.*\\d)(?=.*[!@#$%^&])|(?=.{8,})(?=.*[a-zA-Z])(?=.*[!@#$%^&]).*$";//
+	String regex1 = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";// To Check Email format is correct
+	boolean validPassword = password.matches(regex);
+	boolean validEmail = email.matches(regex1);
+	if (validPassword == true && validEmail == true &&!username.isEmpty()) {
+		User newUser = new User(username,password,email);
+		
+		UserList.add(newUser);
+		String added = String.format("\n%s %-5s %2s %s %2s %s", "***", "User", "has", " been", "added", "***");
+		System.out.println(added);
+		
+	}
+	else {
+		if(username.isEmpty()) {
+			System.out.println("Empty Username!");
+		}
+		else if(validPassword == false) {
+			System.out.println("Enter a valid Password Format!");
+		}
+		else if(validEmail == false) {
+			System.out.println("Enter a valid Email!");
+		}
+		else if(validPassword == false && validEmail == false) {
+			System.out.println("Enter valid Email and valid Password Format!");
+		}
+		else if(validPassword == false && username.isEmpty()) {
+			System.out.println("Enter valid Password Format and a Username!");
+		}
+	}
+	
+}
+//================================= View User=================================
+public static void viewUser(ArrayList<User>UserList) {
+	String title = String.format("%-10s %-15s ","Username","Email");
+	System.out.println(title);
+	for (int i = 0; i < UserList.size();i++) {
+		String Userheader = String.format("%-10s %-15s ",UserList.get(i).getUsername(),UserList.get(i).getEmail());
+		
+		
+		System.out.println(Userheader);
 
+		
+	}
+}
+//================================= Delete User =================================
+public static boolean deleteUser(ArrayList<User>UserList) {
+	boolean patientfound = false;
+	
 
+	//-------------------
+	// Complete code here
+	//-------------------
+	String pname = Helper.readString("Enter Patient Name > ");
+	String password = Helper.readString("Enter Patient Name > ");
+	for (int i = 0; i < UserList.size();i++) {
+		if(UserList.get(i).getUsername().equals(pname)&&UserList.get(i).getPassword().equals(password)) {
+			
+			String check = Helper.readString("Are you sure you want to delete/deactivate your account? (Y/N) > ");
+			 if(check.equals("Y")) {
+				 UserList.remove(i);
+				 patientfound = true;
+					break;
+			 }
+			 else {
+				 System.out.println("Delete User not successful!");
+			 }
+			
+			
+			
+		}
+		else {
+			System.out.println("Enter the correct Username or Password!");
+		}
+		
+
+	}
+	
+		
+	
+	return patientfound;
+}
 	//================================= Option 1 (View Service) =================================
 
 
