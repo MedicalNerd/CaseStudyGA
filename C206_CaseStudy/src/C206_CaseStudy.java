@@ -157,17 +157,24 @@ public static void addUser(ArrayList<User>UserList) {
 	String username = Helper.readString("Enter username here >");
 	String password = Helper.readString("Enter password here >");
 	String email = Helper.readString("Enter email here >");
-	String regex = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-zA-Z])|(?=.{8,})(?=.*\\d)(?=.*[!@#$%^&])|(?=.{8,})(?=.*[a-zA-Z])(?=.*[!@#$%^&]).*$";//
+	String regex = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-zA-Z])|(?=.{8,})(?=.*\\d)(?=.*[!@#$%^&])|(?=.{8,})(?=.*[a-zA-Z])(?=.*[!@#$%^&]).*$";//Check if password format is right
 	String regex1 = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";// To Check Email format is correct
 	boolean validPassword = password.matches(regex);
 	boolean validEmail = email.matches(regex1);
 	if (validPassword == true && validEmail == true &&!username.isEmpty()) {
-		User newUser = new User(username,password,email);
+		for (int i = 0; i < UserList.size();i++) {
+			if(username.equals(UserList.get(i).getUsername())) {
+				System.out.println("Cant have a username!");
+			}
+			else {
 		
-		UserList.add(newUser);
-		String added = String.format("\n%s %-5s %2s %s %2s %s", "***", "User", "has", " been", "added", "***");
-		System.out.println(added);
+				User newUser = new User(username,password,email);
 		
+				UserList.add(newUser);
+				String added = String.format("\n%s %-5s %2s %s %2s %s", "***", "User", "has", " been", "added", "***");
+				System.out.println(added);
+			}
+		}
 	}
 	else {
 		if(username.isEmpty()) {
@@ -215,6 +222,9 @@ public static boolean deleteUser(ArrayList<User>UserList) {
 			String check = Helper.readString("Are you sure you want to delete/deactivate your account? (Y/N) > ");
 			 if(check.equals("Y")) {
 				 UserList.remove(i);
+				 System.out.println("Username : "+UserList.get(i).getUsername());
+				 System.out.println("Password : "+UserList.get(i).getPassword());
+				 System.out.println("Email : "+UserList.get(i).getEmail());
 				 System.out.println("User Account is successfully deleted!");
 				 patientfound = true;
 				 break;
