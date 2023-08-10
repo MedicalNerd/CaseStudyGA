@@ -39,6 +39,8 @@ public class C206_CaseStudy {
 		UserList.add(new User("Kafka","YES123@oo","Mommy@gmail.com"));
 		appointmentList.add(new Appointment("AP1","Kafka",true, "2023-07-25", "10.00","Johns House Renos"));
 		appointmentList.add(new Appointment("AP2","Mary",true, "2023-07-25", "11.00","Daisy Lawn Renos"));
+		quoteList.add(new Quote("Q1", "John", true, 12345678, "House renovation quote"));
+		quoteList.add(new Quote("Q2", "Jane", true, 98765432, "Lawn renovation quote"));
 
 		int option = 0;
 		while (option != OPTION_QUIT) {
@@ -357,7 +359,7 @@ public static String retrieveQuotes(ArrayList<Quote> quoteList) {
   String output = "";
   for (int i = 0; i < quoteList.size(); i++) {
       Quote quote = quoteList.get(i);
-      output += String.format("%-10s %-15s %-7s %-15d %s%n",
+      output += String.format("%-10s %-15s %-30s %-15d %s%n",
               quote.getAssetTag(), quote.getRecipientName(), quote.getStatus(), quote.getContactNumber(), quote.getDescription());
   }
   return output;
@@ -366,8 +368,8 @@ public static String retrieveQuotes(ArrayList<Quote> quoteList) {
 public static void viewQuotes(ArrayList<Quote> quoteList) {
   C206_CaseStudy.setHeader("VIEW QUOTES");
   
-  String output = String.format("%-10s %-15s %-7s %-15s %s%n",
-          "QUOTE ID", "RECIPIENT", "STATUS", "CONTACT NUMBER", "DESCRIPTION");
+  String output = String.format("%-10s %-15s %-30s %-15s %s%n",
+          "QUOTE ID", "RECIPIENT", "AVAILABILITY", "CONTACT NUMBER", "DESCRIPTION");
   
   output += retrieveQuotes(quoteList);
   System.out.println(output);
