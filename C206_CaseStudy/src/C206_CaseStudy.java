@@ -411,6 +411,41 @@ public static void viewQuotes(ArrayList<Quote> quoteList) {
   //================================= Option 5b  (Add Quote) =================================
     
 	//================================= Option 6a  (Delete Appointment) =================================
+    public static boolean deleteAppointment(ArrayList<Appointment>appointmentList) {
+		boolean apFound = false;
+		String apName = Helper.readString("Enter appointment name > ");
+		
+		
+		for (int i = 0; i < appointmentList.size();i++) {
+			if(appointmentList.get(i).getAppointment().equals(apName)) {
+
+				String check = Helper.readString("Are you sure you want to delete appointment? (Y/N) > ");
+				 if(check.equals("Y")) {
+					 appointmentList.remove(i);
+					 System.out.println("Appointment is successfully deleted!");
+					 apFound = true;
+					 break;
+				 }
+				 else {
+					 System.out.println("Appointment is not deleted successful!");
+				 }
+
+
+
+			}
+			else {
+				System.out.println("Appointment not found");
+			}
+
+
+
+
+		}
+
+		return spFound;
+	}
+		
+    
     
 	//================================= Option 6b  (Delete Quote) =================================
 
