@@ -92,7 +92,7 @@ public class C206_CaseStudy {
 				if (itemType == ACTION_TYPE_APPOINTMENT) {
 					// Delete an appointment.
 					Appointment ap= inputAppointment();
-					C206_CaseStudy.deleteAppointment(appointmentList, ap);
+					C206_CaseStudy.createAppointment(appointmentList, ap);
 					System.out.println("Appointment deleted");
 
 
@@ -114,12 +114,12 @@ public class C206_CaseStudy {
 				deleteUser(UserList);
 			}else if(option == OPTION_VIEW_SERVICEPROVIDER) {
 				// View all services providers currently available.
-				C206_CaseStudy.viewServiceProvider(ServiceProviderList);
+				C206_CaseStudy.viewAllServiceProvider(ServiceProviderList);
 
 			}else if (option == OPTION_CREATE_SERVICEPROVIDER) {
 			   // Create a service provider.
 				ServiceProvider newServiceProvider = C206_CaseStudy.inputServiceProvider();
-	            C206_CaseStudy.addServiceProvider(ServiceProviderList);
+	            C206_CaseStudy.addServiceProvider(ServiceProviderList, newServiceProvider);
 			}
 			else if (option == OPTION_DELETE_SERVICEPROVIDER) {
 			  // Delete a service providers.
@@ -283,7 +283,7 @@ public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
 
 
 public static RenovationServices inputService() {
-	String assetTag = Helper.readString("Enter AssetTag > ");
+	String assetTag = Helper.readString("Enter ServiceID > ");
 	  String serviceProvider = Helper.readString("Enter Service provider > ");
     String serviceName = Helper.readString("Enter service name > ");
 	  String serviceHours = Helper.readString("Enter Service hours > ");
