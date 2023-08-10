@@ -331,6 +331,7 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
       String date = Helper.readString("Enter appointment date > ");
       String time = Helper.readString("Enter appointment time > ");
       String serviceName = Helper.readString("Enter service name > ");
+      boolean status = Helper.readBoolean("Enter status of appointment[Yes/No] >");
       
     
     return new Appointment(assertTag, recipientName, status, date, time, serviceName );
