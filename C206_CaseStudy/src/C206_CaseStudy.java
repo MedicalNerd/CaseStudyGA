@@ -32,12 +32,12 @@ public class C206_CaseStudy {
 		serviceList.add(new RenovationServices("SA1","Johns House Renos", "House Renovation","Specialises in House Renovation","09:00 to 18:00",true));
 		serviceList.add(new RenovationServices("SA2","Daisy Lawn Renos", "Lawn Renovation","Specialises in Lawn Renovation","08:00 to 18:00",true));
 		ServiceProviderList.add(new ServiceProvider("Johns House Renos", "09:00 to 18:00"));
-		ServiceProviderList.add(new ServiceProvider("Daisy Lawn Renos", "09:00 to 18:00"));
+		ServiceProviderList.add(new ServiceProvider("Daisy Lawn Renos", "08:00 to 18:00"));
 		UserList.add(new User("Tom","Password12@","Tom@gmail.com"));
 		UserList.add(new User("Mary","Password@12","Mary@gmail.com"));
 		UserList.add(new User("Kafka","YES123@oo","Mommy@gmail.com"));
-		appointmentList.add(new Appointment("SA1","Kafka",true, "2023-07-25", "10.00","N/A"));
-		appointmentList.add(new Appointment("SA1","Kafka",true, "2023-07-25", "10.00","N/A"));
+		appointmentList.add(new Appointment("AP1","Kafka",true, "2023-07-25", "10.00","Johns House Renos"));
+		appointmentList.add(new Appointment("AP2","Mary",true, "2023-07-25", "11.00","Daisy Lawn Renos"));
 
 		int option = 0;
 		while (option != OPTION_QUIT) {
@@ -330,11 +330,31 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
       String recipientName = Helper.readString("Enter recipient name > ");
       String date = Helper.readString("Enter appointment date > ");
       String time = Helper.readString("Enter appointment time > ");
+      String serviceName = Helper.readString("Enter service name > ");
       
     
-    return new Appointment(assertTag, recipientName, date, time);
+    return new Appointment(assertTag, recipientName, status, date, time, serviceName );
     
-}
+    }
+    
+    public static void createAppointment(ArrayList<Appointment> appointmentList, Appointment appointment) {
+        // Check for missing details
+        if (appointment.getServiceName().isEmpty() || appointment.getRecipientName().isEmpty() ||
+            appointment.getDate().isEmpty() || appointment.getTime().isEmpty()) {
+            System.out.println("Appointment details are missing. Appointment not added.");
+            return;
+        }
+        
+        for (Appointment existingAppointment : appointmentList) {
+            if (existingAppointment.getAssetTag().equalsIgnoreCase(appointment.getAssetTag())) {
+                System.out.println("Appointment with the same asset tag already exists.");
+                return; // Exit the method if appointment already exists
+            }
+        }
+        
+        appointmentList.add(appointment);
+    }
+        
 	
 	//================================= Option 6  (Delete Action) =================================
 
