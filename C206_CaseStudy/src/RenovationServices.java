@@ -1,74 +1,52 @@
 
-public class RenovationServices {
+public class RenovationServices extends ServiceProvider{ // araa
 
 	private String assetTag;
 	private String serviceName;
 	private String serviceDescription;
-	private String contactHours;
 	private boolean isAvailable;
 
-	public RenovationServices(String assetTag, String serviceName, String serviceDescription, String contactHours,
-			boolean isAvailable) {
+	public RenovationServices(String serviceProvider, String serviceProviderDescription, String serviceProviderContactHours, String assetTag, String serviceName, String serviceDescription, boolean isAvailable) {
+		super(serviceProvider, serviceProviderDescription, serviceProviderContactHours);
 		this.assetTag = assetTag;
 		this.serviceName = serviceName;
 		this.serviceDescription = serviceDescription;
-		this.contactHours = contactHours;
 		this.isAvailable = isAvailable;
-	}
-
-	public RenovationServices(String assetTag, String serviceName) {
-		this.assetTag = assetTag;
-		this.serviceName = serviceName;
-	}
-
-	public String toString() {
-	    String output = String.format(
-	        "Asset Tag: %s\nName: %s\nDescription: %s\nContact Hours: %s\nIs Available: %b",
-	        assetTag, serviceName, serviceDescription, contactHours, isAvailable
-	    );
-	    return output;
 	}
 
 	public String getAssetTag() {
 		return assetTag;
 	}
 
-	public String getServiceName() {
-		return serviceName;
-	}
-
-	public String getDescription() {
-		return serviceDescription;
-	}
-
-	public String getContactHours() {
-		return contactHours;
-	}
-
-	public boolean getAvailability() {
-		return isAvailable;
-	}
-
 	public void setAssetTag(String assetTag) {
 		this.assetTag = assetTag;
+	}
+
+	public String getServiceName() {
+		return serviceName;
 	}
 
 	public void setServiceName(String serviceName) {
 		this.serviceName = serviceName;
 	}
 
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+
 	public void setServiceDescription(String serviceDescription) {
 		this.serviceDescription = serviceDescription;
 	}
 
-	public void setContactHours(String contactHours) {
-		this.contactHours = contactHours;
+	public boolean isAvailable() {
+		return isAvailable;
 	}
 
-	public void setAvailability(boolean isAvailable) {
+	public void setAvailable(boolean isAvailable) {
 		this.isAvailable = isAvailable;
 	}
-
+	
+	
 }
 
 //Version 5a

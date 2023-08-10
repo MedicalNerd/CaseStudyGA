@@ -16,6 +16,8 @@ public class C206_CaseStudyTest {
         serviceList = new ArrayList<>();
         serviceList.add(new RenovationServices("SA1", "House Renovation", "Specialises in House Renovation",
                 "09:00 to 18:00", true));
+        serviceList.add(new RenovationServices("SA2", "Lawn Renovation", "Specialises in Lawn Renovation",
+                "08:00 to 18:00", true));
     }
 
     @Test
@@ -32,27 +34,28 @@ public class C206_CaseStudyTest {
     @Test
     void testAddService() {
     	//Add a service as an example.
-        RenovationServices newService = new RenovationServices("SA2", "Bathroom Renovation",
+        RenovationServices newService = new RenovationServices("SA3", "Bathroom Renovation",
                 "Specialises in Bathroom Renovation", "10:00 to 19:00", true);
 
         C206_CaseStudy.addService(serviceList, newService);
-        //Check if the number of services is now 2, as there was 1 already existing service before the new one was added.
-        assertEquals(2, serviceList.size());
+        //Check if the number of services is now 3, as there was 2 already existing service before the new one was added.
+        assertEquals(3, serviceList.size());
         //Check if the newly added service is equal to the information that was inputed.
-        assertEquals(newService, serviceList.get(1));
+        assertEquals(newService, serviceList.get(2));
     }
 
     @Test
     void testDeleteService() {
     	//Delete a service as an example.
-        boolean isDeleted = C206_CaseStudy.deleteService(serviceList, "SA1");
+        boolean isDeleted = C206_CaseStudy.deleteService(serviceList, "SA2");
         assertTrue(isDeleted);
-        //Check if there is no longer any services within the list, as we have removed the only service in the list.
-        assertEquals(0, serviceList.size());
+        //Check if there is only one service left in the list, as we have deleted 1 out of 2 of the services.
+        assertEquals(1, serviceList.size());
         //Check if the service is no longer existing.
-        isDeleted = C206_CaseStudy.deleteService(serviceList, "SA1");
+        isDeleted = C206_CaseStudy.deleteService(serviceList, "SA2");
         assertFalse(isDeleted);
     }
 }
 
-//Version 1
+//Version 2
+
