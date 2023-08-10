@@ -27,6 +27,7 @@ public class C206_CaseStudy {
 		ArrayList<User> UserList = new ArrayList<User>();
 		ArrayList<ServiceProvider> ServiceProviderList = new ArrayList<ServiceProvider>();
 		ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
+		ArrayList<Quote> quoteList = new ArrayList<Quote>();
 
 
 		serviceList.add(new RenovationServices("SA1","Johns House Renos", "House Renovation","Specialises in House Renovation","09:00 to 18:00",true));
@@ -65,11 +66,12 @@ public class C206_CaseStudy {
 				
 				if (itemType == ACTION_TYPE_APPOINTMENT) {
 					// View all appointment.
-					
-
+					C206_CaseStudy.viewAppointments(appointmentList);
+				
 
 				} else if (itemType == ACTION_TYPE_QUOTE) {
 					// View all quote.
+					C206_CaseStudy.viewQuotes(quoteList);
 
 
 				} else {
@@ -106,8 +108,6 @@ public class C206_CaseStudy {
 
 				if (itemType == ACTION_TYPE_APPOINTMENT) {
 					// Delete an appointment.
-					Appointment ap= inputAppointment();
-					C206_CaseStudy.createAppointment(appointmentList, ap);
 					Appointment ap = inputAppointment();
 					C206_CaseStudy.deleteAppointment(appointmentList, ap);
 					System.out.println("Appointment deleted");
@@ -290,7 +290,7 @@ public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
     output += retrieveAllServices(serviceList);
     System.out.println(output);
 }
-
+// ==================================== Option 2 (Add Service) ======================================
 public static RenovationServices inputService() {
 	String assetTag = Helper.readString("Enter ServiceID > ");
 	String serviceProvider = Helper.readString("Enter service provider > ");
@@ -329,22 +329,51 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
     return false;
 }
 	
-	//================================= Option 4 (View Action) =================================
-public static String retrieveAction(ArrayList<Action> actionList) {
-	String output = "";	
-	for (int i = 0; i < actionList.size(); i++) {
-		output += String.format("%-10s %-30s", actionList.get(i).getRecipientName(),
-				actionList.get(i).getStatus());
-}
+//================================= Option 4a (View Appointments) =================================
+public static String retrieveAppointments(ArrayList<Appointment> appointmentList) {
+	String output = "";
+  for (int i = 0; i < appointmentList.size(); i++) {
+      Appointment appointment = appointmentList.get(i);
+      output += String.format("%-10 %-15s %-7s %-12s  %-8s %s%n",
+              appointment.getAssetTag(), appointment.getRecipientName(), appointment.getStatus(),
+              appointment.getDate(), appointment.getTime(), appointment.getServiceName());
+  }
 return output;
 }
 
-public static void viewAllAction(ArrayList<Action> actionList) {
-C206_CaseStudy.setHeader("ACTION LIST");
-String output = String.format("%-10s %-30s\n","Recipent Name","Status");
- output += retrieveAction(actionList);	
-System.out.println(output);
+public static void viewAppointments(ArrayList<Appointment> appointmentList) {
+    C206_CaseStudy.setHeader("VIEW APPOINTMENTS");
+    
+    String output = String.format("%-10s %-15s %-7s %-12s %-8s %s%n",
+            "ASSET TAG", "RECIPIENT", "STATUS", "DATE", "TIME", "SERVICE NAME");
+    
+    output += retrieveAppointments(appointmentList);
+    System.out.println(output);
 }
+
+//================================= Option 4b (View Quotes) =================================
+
+public static String retrieveQuotes(ArrayList<Quote> quoteList) {
+  String output = "";
+  for (int i = 0; i < quoteList.size(); i++) {
+      Quote quote = quoteList.get(i);
+      output += String.format("%-10s %-15s %-7s %-15d %s%n",
+              quote.getAssetTag(), quote.getRecipientName(), quote.getStatus(), quote.getContactNumber(), quote.getDescription());
+  }
+  return output;
+}
+public static void viewQuotes(ArrayList<Quote> quoteList) {
+    C206_CaseStudy.setHeader("VIEW QUOTES");
+    
+    String output = String.format("%-10s %-15s %-7s %-15s %s%n",
+            "ASSET TAG", "RECIPIENT", "STATUS", "CONTACT NUMBER", "DESCRIPTION");
+    
+    output += retrieveQuotes(quoteList);
+    System.out.println(output);
+}
+
+
+
 	//================================= Option 5a (Add Appointment) =================================
     public static Appointment inputAppointment() {
 	  String assertTag = Helper.readString("Enter assert tag > ");
@@ -464,4 +493,4 @@ System.out.println(output);
 		return spFound;
 	}
 }
-//version 2
+//version 3
