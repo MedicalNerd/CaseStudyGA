@@ -6,7 +6,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+
 public class C206_CaseStudyTest {
+	
+	private RenovationServices sa1;
+	private RenovationServices sa2;
+
 
 	private ArrayList<RenovationServices> serviceList;
 
@@ -14,10 +19,10 @@ public class C206_CaseStudyTest {
     void setUp() {
     	//Set up examples for the test cases.
         serviceList = new ArrayList<>();
-        serviceList.add(new RenovationServices("SA1", "House Renovation", "Specialises in House Renovation",
-                "09:00 to 18:00", true));
-        serviceList.add(new RenovationServices("SA2", "Lawn Renovation", "Specialises in Lawn Renovation",
-                "09:00 to 18:00", true));
+        sa1 = new RenovationServices("SA1", "House Renovation", "Specialises in House Renovation",
+                "09:00 to 18:00", true);
+        sa2 = new RenovationServices("SA2", "Lawn Renovation", "Specialises in Lawn Renovation",
+                "09:00 to 18:00", true);
     }
 
     @Test
@@ -56,6 +61,7 @@ public class C206_CaseStudyTest {
         assertFalse(isDeleted);
     }
 }
+
 
 //Version 2
 
