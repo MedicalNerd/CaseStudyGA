@@ -6,36 +6,45 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+
 public class C206_CaseStudyTest {
+	
+	private RenovationServices sa1;
+	private RenovationServices sa2;
+
 
 	private ArrayList<RenovationServices> serviceList;
 
     @Before
-    void setUp() {
+   public void setUp() {
     	//Set up examples for the test cases.
         serviceList = new ArrayList<>();
-        serviceList.add(new RenovationServices("SA1", "House Renovation", "Specialises in House Renovation",
-                "09:00 to 18:00", true));
-        serviceList.add(new RenovationServices("SA2", "Lawn Renovation", "Specialises in Lawn Renovation",
-                "08:00 to 18:00", true));
+        serviceList.add(new RenovationServices("Provider1","House Company","09:00 to 18:00","SA1","House Renovation","Specialises in House Renovation",true));
+		serviceList.add(new RenovationServices("Provider2","Lawn Company","05:00 to 18:00","SA2","Lawn Renovation","Specialises in Lawn Renovation",true));
+		
+        
+        serviceList.add(sa1);
+        serviceList.add(sa2);
     }
 
+
     @Test
-    void testViewAllServices() {
-    	//Create the output that  is expected to be printed out.
-        String expectedOutput = String.format("%-10s %-30s %-30s %-20s %s\n", "ASSET TAG", "SERVICE NAME",
-                "SERVICE DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
-        expectedOutput += String.format("%-10s %-30s %-30s %-20s %s\n", "SA1", "House Renovation",
-                "Specialises in House Renovation", "09:00 to 18:00", "Yes");
-        //See if if the output actually generated matches with the expected.
+    public void testViewAllServices() {
+        // Create the expected output that is supposed to be printed out
+        String expectedOutput = String.format("%-20s %-40s %-20s %-10s %-20s %-40s %-10s\n", "ASSET TAG", "SERVICE NAME",
+                "SERVICE PROVIDER", "CONTACT HOURS", "SERVICE NAME", "DESCRIPTION", "AVAILABLE");
+        expectedOutput += String.format("%-20s %-40s %-20s %-10s %-20s %-40s %-10s\n", "SA1", "House Renovation", "House Company",
+                "09:00 to 18:00", "House Renovation", "Specialises in House Renovation", "Yes");
+        expectedOutput += String.format("%-20s %-40s %-20s %-10s %-20s %-40s %-10s\n", "SA2", "Lawn Renovation", "Lawn Company",
+                "05:00 to 18:00", "Lawn Renovation", "Specialises in Lawn Renovation", "Yes");
+
         assertEquals(expectedOutput, C206_CaseStudy.retrieveAllServices(serviceList));
     }
 
     @Test
-    void testAddService() {
+    public void testAddService() {
     	//Add a service as an example.
-        RenovationServices newService = new RenovationServices("SA3", "Bathroom Renovation",
-                "Specialises in Bathroom Renovation", "10:00 to 19:00", true);
+    	RenovationServices newService = new RenovationServices("Provider3","Bathroom Company","4:00 to 18:00","SA2","Bath Renovation","Specialises in Bathroom Renovation",false);
 
         C206_CaseStudy.addService(serviceList, newService);
         //Check if the number of services is now 3, as there was 2 already existing service before the new one was added.
@@ -45,7 +54,7 @@ public class C206_CaseStudyTest {
     }
 
     @Test
-    void testDeleteService() {
+    public void testDeleteService() {
     	//Delete a service as an example.
         boolean isDeleted = C206_CaseStudy.deleteService(serviceList, "SA2");
         assertTrue(isDeleted);
@@ -56,6 +65,7 @@ public class C206_CaseStudyTest {
         assertFalse(isDeleted);
     }
 }
+
 
 //Version 2
 
