@@ -322,9 +322,9 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
     return false;
 }
 	
-	//================================= Option 4 (View Action) =================================
+	//================================= Option 4 (View all Actions (Appointments and Quotes)) =================================
 	
-	//================================= Option 5 (Add appointment) =================================
+	//================================= Option 5a (Add Appointment) =================================
     public static Appointment inputAppointment() {
 	  String assertTag = Helper.readString("Enter assert tag > ");
       String recipientName = Helper.readString("Enter recipient name > ");
@@ -355,9 +355,11 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
         
         appointmentList.add(appointment);
     }
-        
+  //================================= Option 5b (Add Quote) =================================
 	
-	//================================= Option 6  (Delete Action) =================================
+	//================================= Option 6a  (Delete Appointment) =================================
+    
+  //================================= Option 6b  (Delete Quote =================================
 
 //================================= Option 10 (View Service Providers) =================================
 	public static String retrieveAllServiceProvider(ArrayList<ServiceProvider> ServiceProviderList) {
