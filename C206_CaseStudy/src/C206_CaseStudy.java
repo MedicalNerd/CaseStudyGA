@@ -2,8 +2,6 @@ import java.util.ArrayList;
 
 public class C206_CaseStudy {
 
-
-	
 	private static final int ACTION_TYPE_QUOTE = 2;
 	private static final int ACTION_TYPE_APPOINTMENT = 1;
 	private static final int OPTION_VIEW_SERVICE = 1;
@@ -15,13 +13,13 @@ public class C206_CaseStudy {
 	private static final int OPTION_ADDUSER = 7;
 	private static final int OPTION_VIEWUSERS = 8;
 	private static final int OPTION_DELETEUSERS = 9;
-	private static final int OPTION_VIEW_SERVICEPROVIDER = 10; //ara
+	private static final int OPTION_VIEW_SERVICEPROVIDER = 10; // ara
 	private static final int OPTION_CREATE_SERVICEPROVIDER = 11;
 	private static final int OPTION_DELETE_SERVICEPROVIDER = 12;
 	private static final int OPTION_MANAGE_REQUESTS = 13;
 	private static final int OPTION_QUIT = 14;
-	
-	public static void main(String[] args)  {
+
+	public static void main(String[] args) {
 
 		ArrayList<RenovationServices> serviceList = new ArrayList<RenovationServices>();
 
@@ -30,16 +28,17 @@ public class C206_CaseStudy {
 		ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
 		ArrayList<Quote> quoteList = new ArrayList<Quote>();
 
-
-		serviceList.add(new RenovationServices("SA1","Johns House Renos", "House Renovation","Specialises in House Renovation","09:00 to 18:00",true));
-		serviceList.add(new RenovationServices("SA2","Daisy Lawn Renos", "Lawn Renovation","Specialises in Lawn Renovation","08:00 to 18:00",true));
+		serviceList.add(new RenovationServices("SA1", "Johns House Renos", "House Renovation",
+				"Specialises in House Renovation", "09:00 to 18:00", true));
+		serviceList.add(new RenovationServices("SA2", "Daisy Lawn Renos", "Lawn Renovation",
+				"Specialises in Lawn Renovation", "08:00 to 18:00", true));
 		ServiceProviderList.add(new ServiceProvider("Johns House Renos", "09:00 to 18:00"));
 		ServiceProviderList.add(new ServiceProvider("Daisy Lawn Renos", "08:00 to 18:00"));
-		UserList.add(new User("Tom","Password12@","Tom@gmail.com"));
-		UserList.add(new User("Mary","Password@12","Mary@gmail.com"));
-		UserList.add(new User("Kafka","YES123@oo","Mommy@gmail.com"));
-		appointmentList.add(new Appointment("AP1","Kafka","Pending", "2023-07-25", "10.00","Johns House Renos"));
-		appointmentList.add(new Appointment("AP2","Mary","Pending", "2023-07-25", "11.00","Daisy Lawn Renos"));
+		UserList.add(new User("Tom", "Password12@", "Tom@gmail.com"));
+		UserList.add(new User("Mary", "Password@12", "Mary@gmail.com"));
+		UserList.add(new User("Kafka", "YES123@oo", "Mommy@gmail.com"));
+		appointmentList.add(new Appointment("AP1", "Kafka", "Pending", "2023-07-25", "10.00", "Johns House Renos"));
+		appointmentList.add(new Appointment("AP2", "Mary", "Pending", "2023-07-25", "11.00", "Daisy Lawn Renos"));
 		quoteList.add(new Quote("Q1", "John", "Approved", 12345678, "House renovation quote"));
 		quoteList.add(new Quote("Q2", "Jane", "Pending", 98765432, "Lawn renovation quote"));
 
@@ -53,39 +52,32 @@ public class C206_CaseStudy {
 				// View all services currently available.
 				C206_CaseStudy.viewAllServices(serviceList);
 
-
-			}else if (option == OPTION_CREATE_SERVICE) {
-			   // Create a service.
+			} else if (option == OPTION_CREATE_SERVICE) {
+				// Create a service.
 				RenovationServices newService = C206_CaseStudy.inputService();
-	            C206_CaseStudy.addService(serviceList, newService);
-			}
-			else if (option == OPTION_DELETE_SERVICE) {
-			  // Delete a service.
+				C206_CaseStudy.addService(serviceList, newService);
+			} else if (option == OPTION_DELETE_SERVICE) {
+				// Delete a service.
 				C206_CaseStudy.deleteServiceMenu(serviceList);
-			}
-			else if (option == OPTION_VIEW_ACTION) {
-			 // Display Appointments and Quotes
+			} else if (option == OPTION_VIEW_ACTION) {
+				// Display Appointments and Quotes
 				int itemType = Helper.readInt("Appointment[1] or Quote[2]? > ");
-				
+
 				if (itemType == ACTION_TYPE_APPOINTMENT) {
 					// View all appointment.
 					C206_CaseStudy.viewAppointments(appointmentList);
-				
 
 				} else if (itemType == ACTION_TYPE_QUOTE) {
 					// View all quote.
 					C206_CaseStudy.viewQuotes(quoteList);
 
-
 				} else {
 					System.out.println("Invalid type");
 				}
-				
-			}
-			else if (option == OPTION_ADD_ACTION) {
-				// 
 
-				
+			} else if (option == OPTION_ADD_ACTION) {
+				//
+
 				int itemType = Helper.readInt("Appointment[1] or Quote[2]? > ");
 
 				if (itemType == ACTION_TYPE_APPOINTMENT) {
@@ -94,61 +86,51 @@ public class C206_CaseStudy {
 					C206_CaseStudy.createAppointment(appointmentList, ap);
 					System.out.println("Appointment scheduled");
 
-
 				} else if (itemType == ACTION_TYPE_QUOTE) {
 					// Add a quote.
-
 
 				} else {
 					System.out.println("Invalid type");
 				}
 
-			}else if (option == OPTION_DELETE_ACTION) {
-				// 
+			} else if (option == OPTION_DELETE_ACTION) {
+				//
 
-				
 				int itemType = Helper.readInt("Appointment[1] or Quote[2]? > ");
 
 				if (itemType == ACTION_TYPE_APPOINTMENT) {
 					// Delete an appointment.
-	//			Appointment ap = inputAppointment();
-//					C206_CaseStudy.deleteAppointment(appointmentList, ap);
+					C206_CaseStudy.deleteAppointmentMenu(appointmentList);
 					System.out.println("Appointment deleted");
-
 
 				} else if (itemType == ACTION_TYPE_QUOTE) {
 					// Delete a quote.
-
+					C206_CaseStudy.deleteQuoteMenu(quoteList);
 
 				} else {
 					System.out.println("Invalid type");
 				}
 
-			}else if(option == OPTION_ADDUSER){
+			} else if (option == OPTION_ADDUSER) {
 				addUser(UserList);
-			}
-			else if(option == OPTION_VIEWUSERS){
+			} else if (option == OPTION_VIEWUSERS) {
 				viewUser(UserList);
-			}
-			else if(option == OPTION_DELETEUSERS){
+			} else if (option == OPTION_DELETEUSERS) {
 				deleteUser(UserList);
-			}else if(option == OPTION_VIEW_SERVICEPROVIDER) {
+			} else if (option == OPTION_VIEW_SERVICEPROVIDER) {
 				// View all services providers currently available.
 				C206_CaseStudy.viewAllServiceProvider(ServiceProviderList);
 
-			}else if (option == OPTION_CREATE_SERVICEPROVIDER) {
-			   // Create a service provider.
+			} else if (option == OPTION_CREATE_SERVICEPROVIDER) {
+				// Create a service provider.
 				ServiceProvider newServiceProvider = C206_CaseStudy.inputServiceProvider();
-	            C206_CaseStudy.addServiceProvider(ServiceProviderList, newServiceProvider);
-			}
-			else if (option == OPTION_DELETE_SERVICEPROVIDER) {
-			  // Delete a service providers.
+				C206_CaseStudy.addServiceProvider(ServiceProviderList, newServiceProvider);
+			} else if (option == OPTION_DELETE_SERVICEPROVIDER) {
+				// Delete a service providers.
 				C206_CaseStudy.deleteServiceProvider(ServiceProviderList);
-			}
-			else if (option == OPTION_MANAGE_REQUESTS) {
-				  // Manage pending requests.
-				}
-			else if (option == OPTION_QUIT) {
+			} else if (option == OPTION_MANAGE_REQUESTS) {
+				// Manage pending requests.
+			} else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
 			} else {
 				System.out.println("Invalid option");
@@ -156,8 +138,7 @@ public class C206_CaseStudy {
 
 		}
 
-}
-
+	}
 
 	public static void menu() {
 		C206_CaseStudy.setHeader("RENOVATION PORTAL APP");
@@ -197,340 +178,360 @@ public class C206_CaseStudy {
 	}
 
 //================================= Option 7  (Add User Validation) =================================
-public static void addUser(ArrayList<User>UserList) {
-	String username = Helper.readString("Enter username here >");
-	String password = Helper.readString("Enter password here >");
-	String email = Helper.readString("Enter email here >");
-	String regex = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-zA-Z])|(?=.{8,})(?=.*\\d)(?=.*[!@#$%^&])|(?=.{8,})(?=.*[a-zA-Z])(?=.*[!@#$%^&]).*$";//
-	String regex1 = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";// To Check Email format is correct
-	boolean validPassword = password.matches(regex);
-	boolean validEmail = email.matches(regex1);
-	if (validPassword == true && validEmail == true &&!username.isEmpty()) {
-		User newUser = new User(username,password,email);
-		
-		UserList.add(newUser);
-		String added = String.format("\n%s %-5s %2s %s %2s %s", "***", "User", "has", " been", "added", "***");
-		System.out.println(added);
-		
-	}
-	else {
-		if(username.isEmpty()) {
-			System.out.println("Empty Username!");
-		}
-		else if(validPassword == false) {
-			System.out.println("Enter a valid Password Format!");
-		}
-		else if(validEmail == false) {
-			System.out.println("Enter a valid Email!");
-		}
-		else if(validPassword == false && validEmail == false) {
-			System.out.println("Enter valid Email and valid Password Format!");
-		}
-		else if(validPassword == false && username.isEmpty()) {
-			System.out.println("Enter valid Password Format and a Username!");
+	public static void addUser(ArrayList<User> UserList) {
+		String username = Helper.readString("Enter username here >");
+		String password = Helper.readString("Enter password here >");
+		String email = Helper.readString("Enter email here >");
+		String regex = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-zA-Z])|(?=.{8,})(?=.*\\d)(?=.*[!@#$%^&])|(?=.{8,})(?=.*[a-zA-Z])(?=.*[!@#$%^&]).*$";//
+		String regex1 = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";// To Check Email format is correct
+		boolean validPassword = password.matches(regex);
+		boolean validEmail = email.matches(regex1);
+		if (validPassword == true && validEmail == true && !username.isEmpty()) {
+			User newUser = new User(username, password, email);
+
+			UserList.add(newUser);
+			String added = String.format("\n%s %-5s %2s %s %2s %s", "***", "User", "has", " been", "added", "***");
+			System.out.println(added);
+
+		} else {
+			if (username.isEmpty()) {
+				System.out.println("Empty Username!");
+			} else if (validPassword == false) {
+				System.out.println("Enter a valid Password Format!");
+			} else if (validEmail == false) {
+				System.out.println("Enter a valid Email!");
+			} else if (validPassword == false && validEmail == false) {
+				System.out.println("Enter valid Email and valid Password Format!");
+			} else if (validPassword == false && username.isEmpty()) {
+				System.out.println("Enter valid Password Format and a Username!");
+			}
 		}
 	}
-}
+
 //================================= Option 8 (View User) =================================
-public static void viewUser(ArrayList<User>UserList) {
-	String title = String.format("%-10s %-15s ","Username","Email");
-	System.out.println(title);
-	for (int i = 0; i < UserList.size();i++) {
-		String Userheader = String.format("%-10s %-15s ",UserList.get(i).getUsername(),UserList.get(i).getEmail());
-		System.out.println(Userheader);
+	public static void viewUser(ArrayList<User> UserList) {
+		String title = String.format("%-10s %-15s ", "Username", "Email");
+		System.out.println(title);
+		for (int i = 0; i < UserList.size(); i++) {
+			String Userheader = String.format("%-10s %-15s ", UserList.get(i).getUsername(),
+					UserList.get(i).getEmail());
+			System.out.println(Userheader);
 
-		
+		}
 	}
-}
+
 //================================= Option 9 (Delete User0 =================================
-public static boolean deleteUser(ArrayList<User>UserList) {
-	boolean patientfound = false;
-	
+	public static boolean deleteUser(ArrayList<User> UserList) {
+		boolean patientfound = false;
 
-	//-------------------
-	// Complete code here
-	//-------------------
-	String pname = Helper.readString("Enter Patient Name > ");
-	String password = Helper.readString("Enter Patient Name > ");
-	for (int i = 0; i < UserList.size();i++) {
-		if(UserList.get(i).getUsername().equals(pname)&&UserList.get(i).getPassword().equals(password)) {
-			
-			String check = Helper.readString("Are you sure you want to delete/deactivate your account? (Y/N) > ");
-			 if(check.equals("Y")) {
-				 UserList.remove(i);
-				 System.out.println("User Account is successfully deleted!");
-				 patientfound = true;
-				 break;
-			 }
-			 else {
-				 System.out.println("Delete User not successful!");
-			 }
-			
-			
-			
-		}
-		else {
-			System.out.println("Enter the correct Username or Password!");
-		}
-		
+		// -------------------
+		// Complete code here
+		// -------------------
+		String pname = Helper.readString("Enter Patient Name > ");
+		String password = Helper.readString("Enter Patient Name > ");
+		for (int i = 0; i < UserList.size(); i++) {
+			if (UserList.get(i).getUsername().equals(pname) && UserList.get(i).getPassword().equals(password)) {
 
+				String check = Helper.readString("Are you sure you want to delete/deactivate your account? (Y/N) > ");
+				if (check.equals("Y")) {
+					UserList.remove(i);
+					System.out.println("User Account is successfully deleted!");
+					patientfound = true;
+					break;
+				} else {
+					System.out.println("Delete User not successful!");
+				}
+
+			} else {
+				System.out.println("Enter the correct Username or Password!");
+			}
+
+		}
+
+		return patientfound;
 	}
-	
-		
-	
-	return patientfound;
-}
-	//================================= Option 1 (View Service) =================================
-public static String retrieveAllServices(ArrayList<RenovationServices> serviceList) {
-    String output = "";
-    for (int i = 0; i < serviceList.size(); i++) {
-        RenovationServices service = serviceList.get(i);
-        output += String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n",service.getAssetTag(),service.getServiceProvider(),service.getServiceName(), service.getDescription(),
-               service.getContactHours(),
-                C206_CaseStudy.showAvailability(service.getAvailability()));
-    }
-    return output;
-}
-public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
-    C206_CaseStudy.setHeader("ALL SERVICES");
-    String output = String.format("%-20s %-40s %-20s %-20s %-40s %-10s\\n","ASSET TAG","SERVICE PROVIDER", "SERVICE NAME", "DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
-    output += retrieveAllServices(serviceList);
-    System.out.println(output);
-}
+
+	// ================================= Option 1 (View Service)
+	// =================================
+	public static String retrieveAllServices(ArrayList<RenovationServices> serviceList) {
+		String output = "";
+		for (int i = 0; i < serviceList.size(); i++) {
+			RenovationServices service = serviceList.get(i);
+			output += String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", service.getAssetTag(),
+					service.getServiceProvider(), service.getServiceName(), service.getDescription(),
+					service.getContactHours(), C206_CaseStudy.showAvailability(service.getAvailability()));
+		}
+		return output;
+	}
+
+	public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
+		C206_CaseStudy.setHeader("ALL SERVICES");
+		String output = String.format("%-20s %-40s %-20s %-20s %-40s %-10s\\n", "ASSET TAG", "SERVICE PROVIDER",
+				"SERVICE NAME", "DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
+		output += retrieveAllServices(serviceList);
+		System.out.println(output);
+	}
+
 // ==================================== Option 2 (Add Service) ======================================
-public static RenovationServices inputService() {
-	String assetTag = Helper.readString("Enter ServiceID > ");
-	String serviceProvider = Helper.readString("Enter service provider > ");
-    String serviceName = Helper.readString("Enter service name > ");
-	  String serviceHours = Helper.readString("Enter Service hours > ");
-    String description = Helper.readString("Enter service description > ");
-    boolean isAvailable = Helper.readBoolean("Is the service available? (Yes/No) > ");
-    
-    return new RenovationServices(assetTag,serviceProvider,serviceName, description,serviceHours,isAvailable);
-}
+	public static RenovationServices inputService() {
+		String assetTag = Helper.readString("Enter ServiceID > ");
+		String serviceProvider = Helper.readString("Enter service provider > ");
+		String serviceName = Helper.readString("Enter service name > ");
+		String serviceHours = Helper.readString("Enter Service hours > ");
+		String description = Helper.readString("Enter service description > ");
+		boolean isAvailable = Helper.readBoolean("Is the service available? (Yes/No) > ");
 
-public static void addService(ArrayList<RenovationServices> serviceList, RenovationServices inputService) {
-    serviceList.add(inputService);
-    System.out.println("Service added successfully.");
-}
-	
-	//================================= Option 3 (Delete Service)  =================================
-public static void deleteServiceMenu(ArrayList<RenovationServices> serviceList) {
-    C206_CaseStudy.setHeader("DELETE SERVICE");
-    String assetTag = Helper.readString("Enter asset tag of the service to delete > ");
-    boolean isDeleted = C206_CaseStudy.deleteService(serviceList, assetTag);
-    if (isDeleted) {
-        System.out.println("Service deleted successfully.");
-    } else {
-        System.out.println("Service not found or unable to delete.");
-    }
-}
-public static boolean deleteService(ArrayList<RenovationServices> serviceList, String assetTag) {
-    for (int i = 0; i < serviceList.size(); i++) {
-        RenovationServices service = serviceList.get(i);
-        if (service.getAssetTag().equalsIgnoreCase(assetTag)) {
-            serviceList.remove(i);
-            return true;
-        }
-    }
-    return false;
-}
-	
+		return new RenovationServices(assetTag, serviceProvider, serviceName, description, serviceHours, isAvailable);
+	}
+
+	public static void addService(ArrayList<RenovationServices> serviceList, RenovationServices inputService) {
+		serviceList.add(inputService);
+		System.out.println("Service added successfully.");
+	}
+
+	// ================================= Option 3 (Delete Service)
+	// =================================
+	public static void deleteServiceMenu(ArrayList<RenovationServices> serviceList) {
+		C206_CaseStudy.setHeader("DELETE SERVICE");
+		String assetTag = Helper.readString("Enter asset tag of the service to delete > ");
+		boolean isDeleted = C206_CaseStudy.deleteService(serviceList, assetTag);
+		if (isDeleted) {
+			System.out.println("Service deleted successfully.");
+		} else {
+			System.out.println("Service not found or unable to delete.");
+		}
+	}
+
+	public static boolean deleteService(ArrayList<RenovationServices> serviceList, String assetTag) {
+		for (int i = 0; i < serviceList.size(); i++) {
+			RenovationServices service = serviceList.get(i);
+			if (service.getAssetTag().equalsIgnoreCase(assetTag)) {
+				serviceList.remove(i);
+				return true;
+			}
+		}
+		return false;
+	}
+
 //================================= Option 4a (View Appointments) =================================
-public static String retrieveAppointments(ArrayList<Appointment> appointmentList) {
-  String output = "";
-  for (int i = 0; i < appointmentList.size(); i++) {
-      Appointment appointment = appointmentList.get(i);
-      output += String.format("%-10s %-15s %-7s %-12s %-8s %s%n",
-              appointment.getAssetTag(), appointment.getRecipientName(), appointment.getStatus(),
-              appointment.getDate(), appointment.getTime(), appointment.getServiceName());
-  }
-  return output;
-}
+	public static String retrieveAppointments(ArrayList<Appointment> appointmentList) {
+		String output = "";
+		for (int i = 0; i < appointmentList.size(); i++) {
+			Appointment appointment = appointmentList.get(i);
+			output += String.format("%-10s %-15s %-7s %-12s %-8s %s%n", appointment.getAssetTag(),
+					appointment.getRecipientName(), appointment.getStatus(), appointment.getDate(),
+					appointment.getTime(), appointment.getServiceName());
+		}
+		return output;
+	}
 
-public static void viewAppointments(ArrayList<Appointment> appointmentList) {
-  C206_CaseStudy.setHeader("VIEW APPOINTMENTS");
-  
-  String output = String.format("%-10s %-15s %-7s %-12s %-8s %s%n",
-          "APPOINTMENT ID", "RECIPIENT", "STATUS", "DATE", "TIME", "SERVICE NAME");
-  
-  output += retrieveAppointments(appointmentList);
-  System.out.println(output);
-}
+	public static void viewAppointments(ArrayList<Appointment> appointmentList) {
+		C206_CaseStudy.setHeader("VIEW APPOINTMENTS");
+
+		String output = String.format("%-10s %-15s %-7s %-12s %-8s %s%n", "APPOINTMENT ID", "RECIPIENT", "STATUS",
+				"DATE", "TIME", "SERVICE NAME");
+
+		output += retrieveAppointments(appointmentList);
+		System.out.println(output);
+	}
 
 //================================= Option 4b (View Quotes) =================================
 
-public static String retrieveQuotes(ArrayList<Quote> quoteList) {
-  String output = "";
-  for (int i = 0; i < quoteList.size(); i++) {
-      Quote quote = quoteList.get(i);
-      output += String.format("%-10s %-15s %-23s %-15d %s%n",
-              quote.getAssetTag(), quote.getRecipientName(), quote.getStatus(), quote.getContactNumber(), quote.getDescription());
-  }
-  return output;
-}
+	public static String retrieveQuotes(ArrayList<Quote> quoteList) {
+		String output = "";
+		for (int i = 0; i < quoteList.size(); i++) {
+			Quote quote = quoteList.get(i);
+			output += String.format("%-10s %-15s %-23s %-15d %s%n", quote.getAssetTag(), quote.getRecipientName(),
+					quote.getStatus(), quote.getContactNumber(), quote.getDescription());
+		}
+		return output;
+	}
 
-public static void viewQuotes(ArrayList<Quote> quoteList) {
-  C206_CaseStudy.setHeader("VIEW QUOTES");
-  
-  String output = String.format("%-10s %-15s %-23s %-15s %s%n",
-          "QUOTE ID", "RECIPIENT", "AVAILABILITY", "CONTACT NUMBER", "DESCRIPTION");
-  
-  output += retrieveQuotes(quoteList);
-  System.out.println(output);
-}
+	public static void viewQuotes(ArrayList<Quote> quoteList) {
+		C206_CaseStudy.setHeader("VIEW QUOTES");
 
+		String output = String.format("%-10s %-15s %-23s %-15s %s%n", "QUOTE ID", "RECIPIENT", "AVAILABILITY",
+				"CONTACT NUMBER", "DESCRIPTION");
 
+		output += retrieveQuotes(quoteList);
+		System.out.println(output);
+	}
 
+	// ================================= Option 5a (Add Appointment) ======================================
+	public static Appointment inputAppointment() {
+		String assertTag = Helper.readString("Enter assert tag > ");
+		String recipientName = Helper.readString("Enter recipient name > ");
+		String date = Helper.readString("Enter appointment date > ");
+		String time = Helper.readString("Enter appointment time > ");
+		String serviceName = Helper.readString("Enter service name > ");
+		String status = "Pending";
 
-	//================================= Option 5a (Add Appointment) =================================
-    public static Appointment inputAppointment() {
-	  String assertTag = Helper.readString("Enter assert tag > ");
-      String recipientName = Helper.readString("Enter recipient name > ");
-      String date = Helper.readString("Enter appointment date > ");
-      String time = Helper.readString("Enter appointment time > ");
-      String serviceName = Helper.readString("Enter service name > ");
-      String status = "Pending";
-    
-    return new Appointment(assertTag, recipientName, status, date, time, serviceName );
-    
-    }
-    
-    public static void createAppointment(ArrayList<Appointment> appointmentList, Appointment appointment) {
-        // Check for missing details
-        if (appointment.getServiceName().isEmpty() || appointment.getRecipientName().isEmpty() ||
-            appointment.getDate().isEmpty() || appointment.getTime().isEmpty()) {
-            System.out.println("Appointment details are missing. Appointment not added.");
-            return;
-        }
-        
-        for (Appointment existingAppointment : appointmentList) {
-            if (existingAppointment.getAssetTag().equalsIgnoreCase(appointment.getAssetTag())) {
-                System.out.println("Appointment with the same asset tag already exists.");
-                return; // Exit the method if appointment already exists
-            }
-        }
-        
-        appointmentList.add(appointment);
-    }
-  //================================= Option 5b  (Add Quote) =================================
-    
-	//================================= Option 6a  (Delete Appointment) =================================
-    public static boolean deleteAppointment(ArrayList<Appointment>appointmentList) {
-		boolean apFound = false;
-		String apName = Helper.readString("Enter appointment name > ");
-		
-		
-		for (int i = 0; i < appointmentList.size();i++) {
-			if(appointmentList.get(i).getAppointment().equals(apName)) {
+		return new Appointment(assertTag, recipientName, status, date, time, serviceName);
 
-				String check = Helper.readString("Are you sure you want to delete appointment? (Y/N) > ");
-				 if(check.equals("Y")) {
-					 appointmentList.remove(i);
-					 System.out.println("Appointment is successfully deleted!");
-					 apFound = true;
-					 break;
-				 }
-				 else {
-					 System.out.println("Appointment is not deleted successful!");
-				 }
+	}
 
-
-
-			}
-			else {
-				System.out.println("Appointment not found");
-			}
-
-
-
-
+	public static void createAppointment(ArrayList<Appointment> appointmentList, Appointment appointment) {
+		// Check for missing details
+		if (appointment.getServiceName().isEmpty() || appointment.getRecipientName().isEmpty()
+				|| appointment.getDate().isEmpty() || appointment.getTime().isEmpty()) {
+			System.out.println("Appointment details are missing. Appointment not added.");
+			return;
 		}
 
-		return apFound;
+		for (Appointment existingAppointment : appointmentList) {
+			if (existingAppointment.getAssetTag().equalsIgnoreCase(appointment.getAssetTag())) {
+				System.out.println("Appointment with the same asset tag already exists.");
+				return; // Exit the method if appointment already exists
+			}
+		}
+
+		appointmentList.add(appointment);
 	}
-		
-    
-    
-	//================================= Option 6b  (Delete Quote) =================================
+	// ================================= Option 5b (Add Quote)===========================================
+
+	public static Quote inputQuote() {
+	    String assetTag = Helper.readString("Enter asset tag > ");
+	    String recipientName = Helper.readString("Enter recipient name > ");
+	    String description = Helper.readString("Enter description > ");
+	    int contactNumber = Helper.readInt("Enter contact number > ");
+	    String status = "Pending";
+	    
+	    return new Quote(assetTag, recipientName, status, contactNumber, description);
+	    
+	}
+	public static void createQuote(ArrayList<Quote> quoteList, Quote quote) {
+		// Check for missing details
+		if (quote.getServiceName().isEmpty() || quote.getRecipientName().isEmpty()
+				|| quote.getDescription().isEmpty() || quote.getContactNumber() == 0) {
+			System.out.println("Quote details are missing. Quote not added.");
+			return;
+		}
+
+		for (Quote existingQuote : quoteList) {
+			if (existingQuote.getAssetTag().equalsIgnoreCase(quote.getAssetTag())) {
+				System.out.println("Appointment with the same asset tag already exists.");
+				return; // Exit the method if appointment already exists
+			}
+		}
+
+		quoteList.add(quote);
+	}
+
+	// ================================= Option 6a (Delete Appointment) =================================
+
+	public static boolean deleteAppointment(ArrayList<Appointment> appointmentList, String assetTag) {
+		for (int i = 0; i < appointmentList.size(); i++) {
+			Appointment appointment = appointmentList.get(i);
+			if (appointment.getAssetTag().equalsIgnoreCase(assetTag)) {
+				appointmentList.remove(i);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static void deleteAppointmentMenu(ArrayList<Appointment> appointmentList) {
+		String assetTag = Helper.readString("Enter ID of the appointment to delete > ");
+		boolean isDeleted = deleteAppointment(appointmentList, assetTag);
+
+		if (isDeleted) {
+			System.out.println("Appointment deleted successfully.");
+		} else {
+			System.out.println("Appointment not found or unable to delete.");
+		}
+	}
+
+	// ================================= Option 6b (Delete Quote) ==========================================
+	
+	public static void deleteQuoteMenu(ArrayList<Quote> quoteList) {
+	    String assetTag = Helper.readString("Enter asset tag of the quote to delete > ");
+	    boolean isDeleted = deleteQuote(quoteList, assetTag);
+	    
+	    if (isDeleted) {
+	        System.out.println("Quote deleted successfully.");
+	    } else {
+	        System.out.println("Quote not found or unable to delete.");
+	    }
+	}
+
+
+	public static boolean deleteQuote(ArrayList<Quote> quoteList, String assetTag) {
+	    for (int i = 0; i < quoteList.size(); i++) {
+	        Quote quote = quoteList.get(i);
+	        if (quote.getAssetTag().equalsIgnoreCase(assetTag)) {
+	            quoteList.remove(i);
+	            return true;
+	        }
+	    }
+	    return false;
+	}
 
 //================================= Option 10 (View Service Providers) =================================
 	public static String retrieveAllServiceProvider(ArrayList<ServiceProvider> ServiceProviderList) {
 		String output = "";
 
 		for (int i = 0; i < ServiceProviderList.size(); i++) {
-				output += String.format("%-10s %-30s", ServiceProviderList.get(i).getServiceProvider(),
-				ServiceProviderList.get(i).getServiceProviderContactHours());
+			output += String.format("%-10s %-30s", ServiceProviderList.get(i).getServiceProvider(),
+					ServiceProviderList.get(i).getServiceProviderContactHours());
 		}
 		return output;
 	}
 
 	public static void viewAllServiceProvider(ArrayList<ServiceProvider> ServiceProviderList) {
 		C206_CaseStudy.setHeader("SERVICE PROVIDER LIST");
-		String output = String.format("%-10s %-30s\n","Service Provider","Contact Hours");
-		 output += retrieveAllServiceProvider(ServiceProviderList);	
+		String output = String.format("%-10s %-30s\n", "Service Provider", "Contact Hours");
+		output += retrieveAllServiceProvider(ServiceProviderList);
 		System.out.println(output);
 	}
 
-
-
-	//================================= Option 11 (Add Service Provider) =================================
+	// ================================= Option 11 (Add Service Provider)
+	// =================================
 	public static ServiceProvider inputServiceProvider() {
 		String name = Helper.readString("Enter asset tag > ");
 		String hours = Helper.readString("Enter description > ");
 
-
-
-		ServiceProvider sp= new ServiceProvider(name, hours);
+		ServiceProvider sp = new ServiceProvider(name, hours);
 		return sp;
 
 	}
+
 	public static void addServiceProvider(ArrayList<ServiceProvider> ServiceProviderList, ServiceProvider sp) {
 		ServiceProvider spro;
-		for(int i = 0; i < ServiceProviderList.size(); i++) {
+		for (int i = 0; i < ServiceProviderList.size(); i++) {
 			spro = ServiceProviderList.get(i);
-			if (spro.getServiceProvider().equalsIgnoreCase(sp.getServiceProvider()) )
+			if (spro.getServiceProvider().equalsIgnoreCase(sp.getServiceProvider()))
 				return;
 		}
-		if ((sp.getServiceProvider().isEmpty()) || (sp.getServiceProvider().isEmpty()) ) {
+		if ((sp.getServiceProvider().isEmpty()) || (sp.getServiceProvider().isEmpty())) {
 			return;
 		}
 
 		ServiceProviderList.add(sp);
 	}
 
+	// ================================= Option 12 (Delete Service Provider)
+	// =================================
 
-
-	
-	//================================= Option 12  (Delete Service Provider) =================================
-
-	public static boolean deleteServiceProvider(ArrayList<ServiceProvider>ServiceProviderList) {
+	public static boolean deleteServiceProvider(ArrayList<ServiceProvider> ServiceProviderList) {
 		boolean spFound = false;
 
 		String spname = Helper.readString("Enter Service Provider Name > ");
-		for (int i = 0; i < ServiceProviderList.size();i++) {
-			if(ServiceProviderList.get(i).getServiceProvider().equals(spname)) {
+		for (int i = 0; i < ServiceProviderList.size(); i++) {
+			if (ServiceProviderList.get(i).getServiceProvider().equals(spname)) {
 
 				String check = Helper.readString("Are you sure you want to delete service provider? (Y/N) > ");
-				 if(check.equals("Y")) {
-					 ServiceProviderList.remove(i);
-					 System.out.println("Service Provider is successfully deleted!");
-					 spFound = true;
-					 break;
-				 }
-				 else {
-					 System.out.println("Delete Service Provider not successful!");
-				 }
+				if (check.equals("Y")) {
+					ServiceProviderList.remove(i);
+					System.out.println("Service Provider is successfully deleted!");
+					spFound = true;
+					break;
+				} else {
+					System.out.println("Delete Service Provider not successful!");
+				}
 
-
-
-			}
-			else {
+			} else {
 				System.out.println("Service Provider not found");
 			}
-
-
-
 
 		}
 
@@ -539,6 +540,5 @@ public static void viewQuotes(ArrayList<Quote> quoteList) {
 }
 
 //================================= Option 13  (Manage Requests) =================================
-
 
 //version 3
