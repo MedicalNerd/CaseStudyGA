@@ -29,7 +29,6 @@ public class C206_CaseStudy {
 		ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
 
 
-		serviceList.add(new RenovationServices("SA1", "Johns House Renos","House Renovation","Specialises in House Renovation","09:00 to 18:00",true));
 		serviceList.add(new RenovationServices("SA1","Johns House Renos", "House Renovation","Specialises in House Renovation","09:00 to 18:00",true));
 		serviceList.add(new RenovationServices("SA2","Daisy Lawn Renos", "Lawn Renovation","Specialises in Lawn Renovation","08:00 to 18:00",true));
 		ServiceProviderList.add(new ServiceProvider("Johns House Renos", "09:00 to 18:00"));
@@ -115,16 +114,16 @@ public class C206_CaseStudy {
 				deleteUser(UserList);
 			}else if(option == OPTION_VIEW_SERVICEPROVIDER) {
 				// View all services providers currently available.
-				C206_CaseStudy.viewAllServiceProviders(serviceProviderList);
+				C206_CaseStudy.viewServiceProvider(ServiceProviderList);
 
 			}else if (option == OPTION_CREATE_SERVICEPROVIDER) {
 			   // Create a service provider.
 				ServiceProvider newServiceProvider = C206_CaseStudy.inputServiceProvider();
-	            C206_CaseStudy.addServiceProvider(serviceList, newServiceProvider);
+	            C206_CaseStudy.addServiceProvider(ServiceProviderList);
 			}
 			else if (option == OPTION_DELETE_SERVICEPROVIDER) {
 			  // Delete a service providers.
-				C206_CaseStudy.deleteServiceProvider(serviceProviderList);
+				C206_CaseStudy.deleteServiceProvider(ServiceProviderList);
 			}
 			else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
@@ -266,16 +265,15 @@ public static String retrieveAllServices(ArrayList<RenovationServices> serviceLi
     String output = "";
     for (int i = 0; i < serviceList.size(); i++) {
         RenovationServices service = serviceList.get(i);
-        output += String.format("%-20s %-40s %-20s %-10s %-20s %-40s %-10s\n",service.getServiceProvider(),service.getServiceProviderDescription(),service.getServiceProviderContactHours(), service.getAssetTag(),
-                service.getServiceName(), service.getServiceDescription(),
+        output += String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n",service.getAssetTag(),service.getServiceProvider(),service.getServiceName(), service.getServiceDescription(),
+               service.getServiceProviderContactHours(),
                 C206_CaseStudy.showAvailability(service.isAvailable()));
     }
     return output;
 }
 public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
     C206_CaseStudy.setHeader("ALL SERVICES");
-    String output = String.format("%-20s %-40s %-20s %-10s %-20s %-40s %-10s\\n","PROVIDER","PROVIDER DESCRIPTION", "CONTACT HOURS", "ASSET TAG", "SERVICE NAME",
-            "DESCRIPTION", "AVAILABLE");
+    String output = String.format("%-20s %-40s %-20s %-20s %-40s %-10s\\n","ASSET TAG","SERVICE PROVIDER", "SERVICE NAME", "DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
     output += retrieveAllServices(serviceList);
     System.out.println(output);
 }
@@ -285,15 +283,14 @@ public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
 
 
 public static RenovationServices inputService() {
-	  String serviceProvider = Helper.readString("Enter asset tag > ");
-	  String serviceDesc = Helper.readString("Enter asset tag > ");
-	  String serviceHours = Helper.readString("Enter asset tag > ");
-	String assetTag = Helper.readString("Enter asset tag > ");
+	String assetTag = Helper.readString("Enter AssetTag > ");
+	  String serviceProvider = Helper.readString("Enter Service provider > ");
     String serviceName = Helper.readString("Enter service name > ");
+	  String serviceHours = Helper.readString("Enter Service hours > ");
     String description = Helper.readString("Enter service description > ");
     boolean isAvailable = Helper.readBoolean("Is the service available? (Yes/No) > ");
     
-    return new RenovationServices(serviceProvider, serviceDesc, serviceHours, assetTag, serviceName, description, isAvailable);
+    return new RenovationServices(assetTag, serviceProvider, serviceName,serviceHours,description, isAvailable);
 }
 
 public static void addService(ArrayList<RenovationServices> serviceList, RenovationServices newService) {
