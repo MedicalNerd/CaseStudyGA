@@ -15,7 +15,7 @@ public class C206_CaseStudy {
 	private static final int OPTION_ADDUSER = 7;
 	private static final int OPTION_VIEWUSERS = 8;
 	private static final int OPTION_DELETEUSERS = 9;
-	private static final int OPTION_VIEW_SERVICEPROVIDER = 10;
+	private static final int OPTION_VIEW_SERVICEPROVIDER = 10; //ara
 	private static final int OPTION_CREATE_SERVICEPROVIDER = 11;
 	private static final int OPTION_DELETE_SERVICEPROVIDER = 12;
 	private static final int OPTION_QUIT = 13;
