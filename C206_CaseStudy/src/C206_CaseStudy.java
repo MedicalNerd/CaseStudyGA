@@ -61,6 +61,21 @@ public class C206_CaseStudy {
 			}
 			else if (option == OPTION_VIEW_ACTION) {
 			 // Display Appointments and Quotes
+				int itemType = Helper.readInt("Appointment[1] or Quote[2]? > ");
+				
+				if (itemType == ACTION_TYPE_APPOINTMENT) {
+					// View all appointment.
+					
+
+
+				} else if (itemType == ACTION_TYPE_QUOTE) {
+					// View all quote.
+
+
+				} else {
+					System.out.println("Invalid type");
+				}
+				
 			}
 			else if (option == OPTION_ADD_ACTION) {
 				// 
@@ -322,16 +337,15 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
     return false;
 }
 	
-	//================================= Option 4 (View all Actions (Appointments and Quotes)) =================================
+	//================================= Option 4 (View Action) =================================
 	
-	//================================= Option 5a (Add Appointment) =================================
+	//================================= Option 5 (Add appointment) =================================
     public static Appointment inputAppointment() {
 	  String assertTag = Helper.readString("Enter assert tag > ");
       String recipientName = Helper.readString("Enter recipient name > ");
       String date = Helper.readString("Enter appointment date > ");
       String time = Helper.readString("Enter appointment time > ");
       String serviceName = Helper.readString("Enter service name > ");
-      boolean status = Helper.readBoolean("Enter status of appointment[Yes/No] >");
       
     
     return new Appointment(assertTag, recipientName, status, date, time, serviceName );
@@ -355,11 +369,9 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
         
         appointmentList.add(appointment);
     }
-  //================================= Option 5b (Add Quote) =================================
+        
 	
-	//================================= Option 6a  (Delete Appointment) =================================
-    
-  //================================= Option 6b  (Delete Quote =================================
+	//================================= Option 6  (Delete Action) =================================
 
 //================================= Option 10 (View Service Providers) =================================
 	public static String retrieveAllServiceProvider(ArrayList<ServiceProvider> ServiceProviderList) {
