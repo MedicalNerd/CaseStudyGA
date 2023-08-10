@@ -12,14 +12,17 @@ public class C206_CaseStudy {
 	private static final int OPTION_VIEW_ACTION = 4;
 	private static final int OPTION_ADD_ACTION = 5;
 	private static final int OPTION_DELETE_ACTION = 6;
-	private static final int OPTION_QUIT = 7;
+	private static final int OPTION_VIEW_SERVICEPROVIDER = 7;
+	private static final int OPTION_CREATE_SERVICEPROVIDER = 8;
+	private static final int OPTION_DELETE_SERVICEPROVIDER = 9;
+	private static final int OPTION_QUIT = 10;
 
 	public static void main(String[] args) {
 
 		ArrayList<RenovationServices> serviceList = new ArrayList<RenovationServices>();
 		ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
 
-		serviceList.add(new RenovationServices("SA1","House Renovation","Specialises in House Renovation","09:00 to 18:00",true));
+		serviceList.add(new RenovationServices("SA1", "Johns House Renos","House Renovation","Specialises in House Renovation","09:00 to 18:00",true));
 		
 
 		int option = 0;
@@ -88,6 +91,19 @@ public class C206_CaseStudy {
 					System.out.println("Invalid type");
 				}
 
+			}else if(option == OPTION_VIEW_SERVICEPROVIDER) {
+				// View all services providers currently available.
+				C206_CaseStudy.viewAllServiceProviders(serviceProviderList);
+
+
+			}else if (option == OPTION_CREATE_SERVICEPROVIDER) {
+			   // Create a service provider.
+				ServiceProvider newServiceProvider = C206_CaseStudy.inputServiceProvider();
+	            C206_CaseStudy.addServiceProvider(serviceList, newServiceProvider);
+			}
+			else if (option == OPTION_DELETE_SERVICEPROVIDER) {
+			  // Delete a service providers.
+				C206_CaseStudy.deleteServiceProvider(serviceProviderList);
 			}
 			
 			else if (option == OPTION_QUIT) {
@@ -108,7 +124,10 @@ public class C206_CaseStudy {
 		System.out.println("4. View all Appointments/Quotes");
 		System.out.println("5. Make an Appointment/Quote");
 		System.out.println("6. Delete an Appointment/Quote");
-		System.out.println("7. Quit");
+		System.out.println("7. Display All Service Providers");
+		System.out.println("8. Create a Service Provider");
+		System.out.println("9. Delete a Service Provider");
+		System.out.println("10. Quit");
 		Helper.line(80, "-");
 
 	}
@@ -200,5 +219,11 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
 	//================================= Option 5 (Add Action) =================================
 	
 	//================================= Option 6  (Delete Action) =================================
+
+	//================================= Option 7 (View Service Providers) =================================
+
+	//================================= Option 8 (Add Service Provider) =================================
+	
+	//================================= Option 9  (Delete Service Provider) =================================
 }
 //version 2
