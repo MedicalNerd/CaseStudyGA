@@ -3,7 +3,7 @@ public class Appointment extends Action {
 	String time;
 	String additional_details;
 	
-	public Appointment(String assetTag, String recipientName,boolean status, String date, String time, String additional_details) {
+	public Appointment(String assetTag, String recipientName,String status, String date, String time, String additional_details) {
 		super(assetTag, recipientName, status);
 		  this.date = date;
 		  this.time = time;
