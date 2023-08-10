@@ -36,8 +36,7 @@ public class C206_CaseStudy {
 		UserList.add(new User("Mary","Password@12","Mary@gmail.com"));
 		UserList.add(new User("Kafka","YES123@oo","Mommy@gmail.com"));
 
-		int option = 0;
-
+		int option = 0
 		while (option != OPTION_QUIT) {
 
 			C206_CaseStudy.menu();
@@ -131,7 +130,7 @@ public class C206_CaseStudy {
 
 		}
 
-	}
+}
 
 	public static void menu() {
 		C206_CaseStudy.setHeader("RENOVATION PORTAL APP");
@@ -141,18 +140,14 @@ public class C206_CaseStudy {
 		System.out.println("4. View all Appointments/Quotes");
 		System.out.println("5. Make an Appointment/Quote");
 		System.out.println("6. Delete an Appointment/Quote");
-<<<<<<< HEAD
 		System.out.println("7. Display All Service Providers");
 		System.out.println("8. Create a Service Provider");
 		System.out.println("9. Delete a Service Provider");
 		System.out.println("10. Quit");
-=======
 		System.out.println("7. Add User");
 		System.out.println("8. View User");
 		System.out.println("9. Delete User");
 		System.out.println("10. Quit");
-	//YL
->>>>>>> branch 'master' of https://github.com/MedicalNerd/CaseStudyGA.git
 		Helper.line(80, "-");
 
 	}
