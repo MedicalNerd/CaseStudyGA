@@ -324,7 +324,17 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
 	
 	//================================= Option 4 (View Action) =================================
 	
-	//================================= Option 5 (Add Action) =================================
+	//================================= Option 5 (Add appointment) =================================
+    public static Appointment inputAppointment() {
+	  String assertTag = Helper.readString("Enter assert tag > ");
+      String recipientName = Helper.readString("Enter recipient name > ");
+      String date = Helper.readString("Enter appointment date > ");
+      String time = Helper.readString("Enter appointment time > ");
+      
+    
+    return new Appointment(assertTag, recipientName, date, time);
+    
+}
 	
 	//================================= Option 6  (Delete Action) =================================
 
