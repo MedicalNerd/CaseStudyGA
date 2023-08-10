@@ -117,19 +117,30 @@ public class C206_CaseStudy {
 		}
 		return avail;
 	}
-}
+
 
 	//================================= Option 1 (View Service) =================================
 
-
 	//================================= Option 2 (Add Service) =================================
-	
 	
 	//================================= Option 3 (Delete Service)  =================================
 
-	
 	//================================= Option 4 (View Action) =================================
-	
+public static String retrieveAction(ArrayList<Action> actionList) {
+	String output = "";	
+	for (int i = 0; i < actionList.size(); i++) {
+		output += String.format("%-10s %-30s", actionList.get(i).getRecipientName(),
+				actionList.get(i).getStatus());
+}
+return output;
+}
+
+public static void viewAllServiceProvider(ArrayList<Action> actionList) {
+C206_CaseStudy.setHeader("ACTION LIST");
+String output = String.format("%-10s %-30s\n","Recipent Name","Status");
+ output += retrieveAction(actionList);	
+System.out.println(output);
+}}
 	//================================= Option 5 (Add Action) =================================
 	
 	//================================= Option 6  (Delete Action) =================================
