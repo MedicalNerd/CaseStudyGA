@@ -19,6 +19,8 @@ public class C206_CaseStudy {
 	private static final int OPTION_CREATE_SERVICEPROVIDER = 11;
 	private static final int OPTION_DELETE_SERVICEPROVIDER = 12;
 	private static final int OPTION_QUIT = 13;
+	
+	public static void main(String[] args)  {
 
 		ArrayList<RenovationServices> serviceList = new ArrayList<RenovationServices>();
 
@@ -35,8 +37,10 @@ public class C206_CaseStudy {
 		UserList.add(new User("Tom","Password12@","Tom@gmail.com"));
 		UserList.add(new User("Mary","Password@12","Mary@gmail.com"));
 		UserList.add(new User("Kafka","YES123@oo","Mommy@gmail.com"));
+		appointmentList.add(new Appointment("SA1","Kafka",true, "2023-07-25", "10.00","N/A"));
+		appointmentList.add(new Appointment("SA1","Kafka",true, "2023-07-25", "10.00","N/A"));
 
-		int option = 0
+		int option = 0;
 		while (option != OPTION_QUIT) {
 
 			C206_CaseStudy.menu();
@@ -132,6 +136,7 @@ public class C206_CaseStudy {
 
 }
 
+
 	public static void menu() {
 		C206_CaseStudy.setHeader("RENOVATION PORTAL APP");
 		System.out.println("1. Display All Services");
@@ -203,6 +208,7 @@ public static void addUser(ArrayList<User>UserList) {
 		}
 	}
 	
+
 }
 //================================= View User=================================
 public static void viewUser(ArrayList<User>UserList) {
