@@ -108,8 +108,8 @@ public class C206_CaseStudy {
 
 				if (itemType == ACTION_TYPE_APPOINTMENT) {
 					// Delete an appointment.
-					Appointment ap = inputAppointment();
-					C206_CaseStudy.deleteAppointment(appointmentList, ap);
+	//			Appointment ap = inputAppointment();
+//					C206_CaseStudy.deleteAppointment(appointmentList, ap);
 					System.out.println("Appointment deleted");
 
 
@@ -334,7 +334,7 @@ public static String retrieveAppointments(ArrayList<Appointment> appointmentList
 	String output = "";
   for (int i = 0; i < appointmentList.size(); i++) {
       Appointment appointment = appointmentList.get(i);
-      output += String.format("%-10 %-15s %-7s %-12s  %-8s %s%n",
+      output += String.format("%-10 %-15s %-7s %-12s  %-8s %s /n",
               appointment.getAssetTag(), appointment.getRecipientName(), appointment.getStatus(),
               appointment.getDate(), appointment.getTime(), appointment.getServiceName());
   }
@@ -344,7 +344,7 @@ return output;
 public static void viewAppointments(ArrayList<Appointment> appointmentList) {
     C206_CaseStudy.setHeader("VIEW APPOINTMENTS");
     
-    String output = String.format("%-10s %-15s %-7s %-12s %-8s %s%n",
+    String output = String.format("%-10s %-15s %-7s %-12s %-8s %s /n",
             "ASSET TAG", "RECIPIENT", "STATUS", "DATE", "TIME", "SERVICE NAME");
     
     output += retrieveAppointments(appointmentList);
