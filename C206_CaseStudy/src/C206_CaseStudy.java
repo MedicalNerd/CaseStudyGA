@@ -337,7 +337,6 @@ public static String retrieveAppointments(ArrayList<Appointment> appointmentList
       output += String.format("%-10s %-15s %-7s %-12s %-8s %s%n",
               appointment.getAssetTag(), appointment.getRecipientName(), appointment.getStatus(),
               appointment.getDate(), appointment.getTime(), appointment.getServiceName());
-      // Corrected format:              ^ - removed
   }
   return output;
 }
@@ -346,7 +345,7 @@ public static void viewAppointments(ArrayList<Appointment> appointmentList) {
   C206_CaseStudy.setHeader("VIEW APPOINTMENTS");
   
   String output = String.format("%-10s %-15s %-7s %-12s %-8s %s%n",
-          "ASSET TAG", "RECIPIENT", "STATUS", "DATE", "TIME", "SERVICE NAME");
+          "APPOINTMENT ID", "RECIPIENT", "STATUS", "DATE", "TIME", "SERVICE NAME");
   
   output += retrieveAppointments(appointmentList);
   System.out.println(output);
@@ -368,7 +367,7 @@ public static void viewQuotes(ArrayList<Quote> quoteList) {
   C206_CaseStudy.setHeader("VIEW QUOTES");
   
   String output = String.format("%-10s %-15s %-7s %-15s %s%n",
-          "ASSET TAG", "RECIPIENT", "STATUS", "CONTACT NUMBER", "DESCRIPTION");
+          "QUOTE ID", "RECIPIENT", "STATUS", "CONTACT NUMBER", "DESCRIPTION");
   
   output += retrieveQuotes(quoteList);
   System.out.println(output);
