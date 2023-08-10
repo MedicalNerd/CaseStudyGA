@@ -20,6 +20,8 @@ public class C206_CaseStudy {
 		ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
 
 		serviceList.add(new RenovationServices("SA1","House Renovation","Specialises in House Renovation","09:00 to 18:00",true));
+		serviceList.add(new RenovationServices("SA2","Lawn Renovation","Specialises in Lawn Renovation","08:00 to 18:00",true));
+		
 		
 
 		int option = 0;
