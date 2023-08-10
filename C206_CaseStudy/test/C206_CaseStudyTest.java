@@ -36,7 +36,20 @@ public class C206_CaseStudyTest {
 
 	@After
 	public void tearDown() throws Exception {
+		
 	}
+	@Test
+	public void testViewAllServices() {
+	    // Create the expected output that is supposed to be printed out
+	    String expectedOutput = String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", "ASSET TAG", "SERVICE PROVIDER",
+				"SERVICE NAME", "DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
+	    expectedOutput += String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", "SA1", "Johns House Renos", "House Renovation",
+				"Specialises in House Renovation", "09:00 to 18:00", "Yes");
+	    expectedOutput += String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", "SA2", "Daisy Lawn Renos", "Lawn Renovation",
+				"Specialises in Lawn Renovation", "08:00 to 18:00", "Yes");
+	    assertEquals(expectedOutput, C206_CaseStudy.retrieveAllServices(serviceList));
+	}
+
 	
 	@Test
     public void testAddService() {
@@ -95,3 +108,4 @@ public class C206_CaseStudyTest {
     }
 
 }
+//version 2
