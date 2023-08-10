@@ -1,5 +1,5 @@
 
-public class ServiceProvider { // araa
+public class ServiceProvider { // araaa
 	
 	private String serviceProvider;
 	private String serviceProviderDescription;
