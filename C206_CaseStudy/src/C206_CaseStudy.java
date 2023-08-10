@@ -27,7 +27,9 @@ public class C206_CaseStudy {
 
 		serviceList.add(new RenovationServices("Provider1","House Company","09:00 to 18:00","SA1","House Renovation","Specialises in House Renovation",true));
 		serviceList.add(new RenovationServices("Provider2","Lawn Company","05:00 to 18:00","SA2","Lawn Renovation","Specialises in Lawn Renovation",true));
-
+		UserList.add(new User("Tom","Password12@","Tom@gmail.com"));
+		UserList.add(new User("Mary","Password@12","Mary@gmail.com"));
+		UserList.add(new User("Kafka","YES123@oo","Mommy@gmail.com"));
 		
 
 		int option = 0;
