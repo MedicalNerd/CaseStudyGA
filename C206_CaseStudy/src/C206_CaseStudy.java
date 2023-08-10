@@ -331,24 +331,25 @@ public static boolean deleteService(ArrayList<RenovationServices> serviceList, S
 	
 //================================= Option 4a (View Appointments) =================================
 public static String retrieveAppointments(ArrayList<Appointment> appointmentList) {
-	String output = "";
+  String output = "";
   for (int i = 0; i < appointmentList.size(); i++) {
       Appointment appointment = appointmentList.get(i);
-      output += String.format("%-10 %-15s %-7s %-12s  %-8s %s \n",
+      output += String.format("%-10s %-15s %-7s %-12s %-8s %s%n",
               appointment.getAssetTag(), appointment.getRecipientName(), appointment.getStatus(),
               appointment.getDate(), appointment.getTime(), appointment.getServiceName());
+      // Corrected format:              ^ - removed
   }
-return output;
+  return output;
 }
 
 public static void viewAppointments(ArrayList<Appointment> appointmentList) {
-    C206_CaseStudy.setHeader("VIEW APPOINTMENTS");
-    
-    String output = String.format("%-10s %-15s %-7s %-12s %-8s %s \n",
-            "ASSET TAG", "RECIPIENT", "STATUS", "DATE", "TIME", "SERVICE NAME");
-    
-    output += retrieveAppointments(appointmentList);
-    System.out.println(output);
+  C206_CaseStudy.setHeader("VIEW APPOINTMENTS");
+  
+  String output = String.format("%-10s %-15s %-7s %-12s %-8s %s%n",
+          "ASSET TAG", "RECIPIENT", "STATUS", "DATE", "TIME", "SERVICE NAME");
+  
+  output += retrieveAppointments(appointmentList);
+  System.out.println(output);
 }
 
 //================================= Option 4b (View Quotes) =================================
@@ -362,15 +363,17 @@ public static String retrieveQuotes(ArrayList<Quote> quoteList) {
   }
   return output;
 }
+
 public static void viewQuotes(ArrayList<Quote> quoteList) {
-    C206_CaseStudy.setHeader("VIEW QUOTES");
-    
-    String output = String.format("%-10s %-15s %-7s %-15s %s%n",
-            "ASSET TAG", "RECIPIENT", "STATUS", "CONTACT NUMBER", "DESCRIPTION");
-    
-    output += retrieveQuotes(quoteList);
-    System.out.println(output);
+  C206_CaseStudy.setHeader("VIEW QUOTES");
+  
+  String output = String.format("%-10s %-15s %-7s %-15s %s%n",
+          "ASSET TAG", "RECIPIENT", "STATUS", "CONTACT NUMBER", "DESCRIPTION");
+  
+  output += retrieveQuotes(quoteList);
+  System.out.println(output);
 }
+
 
 
 
