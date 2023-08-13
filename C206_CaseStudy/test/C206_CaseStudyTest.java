@@ -267,7 +267,7 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testAddRequest() {
 	    // Add a request as an example.
-	    Request newRequest = new Request("R3", "Carol", "Pending", 567890123, "Description 3");
+	    Request newRequest = new Request("RT3", "Carol", "Pending", 567890123, "Description 3");
 	    C206_CaseStudy.addRequest(requestList, newRequest);
 
 	    // Check if the number of requests is now 4, as there were 3 already existing requests before the new one was added.
@@ -280,14 +280,14 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testDeleteRequest() {
 	    // Delete a request as an example.
-	    boolean isDeleted = C206_CaseStudy.removeRequest(requestList, "R1");
+	    boolean isDeleted = C206_CaseStudy.removeRequest(requestList, "RT1");
 	    assertTrue(isDeleted);
 
 	    // Check if there are only two requests left in the list, as we have deleted 1 out of 3 of the requests.
 	    assertEquals(2, requestList.size());
 
 	    // Check if the request is no longer existing.
-	    isDeleted = C206_CaseStudy.removeRequest(requestList, "R1");
+	    isDeleted = C206_CaseStudy.removeRequest(requestList, "RT1");
 	    assertFalse(isDeleted);
 	}
 

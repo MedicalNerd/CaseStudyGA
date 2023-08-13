@@ -95,6 +95,8 @@ public class C206_CaseStudy {
 
 				} else if (itemType == ACTION_TYPE_QUOTE) {
 					// Add a quote.
+					Quote qp = inputQuote();
+					C206_CaseStudy.createQuote(quoteList, qp);
 
 				} else {
 					System.out.println("Invalid type");
@@ -401,6 +403,7 @@ public class C206_CaseStudy {
 		}
 
 		appointmentList.add(appointment);
+		System.out.println("Appointment added");
 	}
 	// ================================= Option 5b (Add Quote)===========================================
 
@@ -416,7 +419,7 @@ public class C206_CaseStudy {
 	}
 	public static void createQuote(ArrayList<Quote> quoteList, Quote quote) {
 		// Check for missing details
-		if (quote.getServiceName().isEmpty() || quote.getRecipientName().isEmpty()
+		if (quote.getAssetTag().isEmpty() || quote.getRecipientName().isEmpty()
 				|| quote.getDescription().isEmpty() || quote.getContactNumber() == 0) {
 			System.out.println("Quote details are missing. Quote not added.");
 			return;
@@ -424,12 +427,13 @@ public class C206_CaseStudy {
 
 		for (Quote existingQuote : quoteList) {
 			if (existingQuote.getAssetTag().equalsIgnoreCase(quote.getAssetTag())) {
-				System.out.println("Appointment with the same asset tag already exists.");
+				System.out.println("Quote with the same asset tag already exists.");
 				return; // Exit the method if appointment already exists
 			}
 		}
 
 		quoteList.add(quote);
+		System.out.println("Quote added.");
 	}
 
 	// ================================= Option 6a (Delete Appointment) =================================
