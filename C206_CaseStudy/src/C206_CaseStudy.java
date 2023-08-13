@@ -16,8 +16,10 @@ public class C206_CaseStudy {
 	private static final int OPTION_VIEW_SERVICEPROVIDER = 10; // ara
 	private static final int OPTION_CREATE_SERVICEPROVIDER = 11;
 	private static final int OPTION_DELETE_SERVICEPROVIDER = 12;
-	private static final int OPTION_MANAGE_REQUESTS = 13;
-	private static final int OPTION_QUIT = 14;
+	private static final int OPTION_VIEW_REQUESTS = 13;
+	private static final int OPTION_ADD_REQUESTS = 14;
+	private static final int OPTION_DELETE_REQUESTS = 15;
+	private static final int OPTION_QUIT = 16;
 
 	public static void main(String[] args) {
 
@@ -27,6 +29,8 @@ public class C206_CaseStudy {
 		ArrayList<ServiceProvider> ServiceProviderList = new ArrayList<ServiceProvider>();
 		ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
 		ArrayList<Quote> quoteList = new ArrayList<Quote>();
+		ArrayList<Request> requestList = new ArrayList<Request>();
+
 
 		serviceList.add(new RenovationServices("SA1", "Johns House Renos", "House Renovation",
 				"Specialises in House Renovation", "09:00 to 18:00", true));
@@ -40,7 +44,10 @@ public class C206_CaseStudy {
 		appointmentList.add(new Appointment("AP1", "Kafka", "Pending", "2023-07-25", "10.00", "Johns House Renos"));
 		appointmentList.add(new Appointment("AP2", "Mary", "Pending", "2023-07-25", "11.00", "Daisy Lawn Renos"));
 		quoteList.add(new Quote("Q1", "John", "Approved", 12345678, "House renovation quote"));
-		quoteList.add(new Quote("Q2", "Jane", "Pending", 98765432, "Lawn renovation quote"));
+		quoteList.add(new Quote("Q2", "Jane", "Approved", 98765432, "Lawn renovation quote"));
+		requestList.add(new Request("RT1", "Alice", "Pending", 123456789, "Description 1"));
+		requestList.add(new Request("RT2", "Bob", "Pending", 987654321, "Description 2"));
+		requestList.add(new Request("RT3", "Carol", "Pending", 567890123, "Description 3"));
 
 		int option = 0;
 		while (option != OPTION_QUIT) {
@@ -126,10 +133,16 @@ public class C206_CaseStudy {
 				ServiceProvider newServiceProvider = C206_CaseStudy.inputServiceProvider();
 				C206_CaseStudy.addServiceProvider(ServiceProviderList, newServiceProvider);
 			} else if (option == OPTION_DELETE_SERVICEPROVIDER) {
-				// Delete a service providers.
 				C206_CaseStudy.deleteServiceProvider(ServiceProviderList);
-			} else if (option == OPTION_MANAGE_REQUESTS) {
-				// Manage pending requests.
+				// Delete a service providers.
+			} else if (option == OPTION_VIEW_REQUESTS) {
+	            viewRequests(requestList);
+	        } else if (option == OPTION_ADD_REQUESTS) {
+	            Request newRequest = inputRequest();
+	            addRequest(requestList, newRequest);
+	            System.out.println("Request added successfully.");
+	        } else if (option == OPTION_DELETE_REQUESTS) {
+	            removeRequestMenu(requestList);
 			} else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
 			} else {
@@ -154,8 +167,10 @@ public class C206_CaseStudy {
 		System.out.println("10. Display All Service Providers");
 		System.out.println("11. Create a Service Provider");
 		System.out.println("12. Delete a Service Provider");
-		System.out.println("13. Manage Requests");
-		System.out.println("14. Quit");
+		System.out.println("13. View Requests");
+		System.out.println("14. Add Requests");
+		System.out.println("15. Remove Requests");
+		System.out.println("16. Quit");
 		Helper.line(80, "-");
 
 	}
@@ -575,8 +590,66 @@ public class C206_CaseStudy {
 			return spFound;
 		}
 	
-}
+		// ================================= Option 13  (View Requests) ================================
+	    public static void viewRequests(ArrayList<Request> requestList) {
+	        setHeader("VIEW REQUESTS");
 
-//================================= Option 13  (Manage Requests) =================================
+	        String output = String.format("%-10s %-15s %-7s %-12s %s%n", "ASSET TAG", "RECIPIENT", "STATUS",
+	                "CONTACT NUMBER", "DESCRIPTION");
+
+	        output += retrieveRequests(requestList);
+	        System.out.println(output);
+	    }
+
+	    public static String retrieveRequests(ArrayList<Request> requestList) {
+	        String output = "";
+	        for (Request request : requestList) {
+	            output += String.format("%-10s %-15s %-7s %-12d %s%n", request.getAssetTag(),
+	                    request.getRecipientName(), request.getStatus(), request.getContactNumber(),
+	                    request.getDescription());
+	        }
+	        return output;
+	    }
+
+	    // ================================= Option 14 (Add Requests) ==================================
+	    public static Request inputRequest() {
+	        String assetTag = Helper.readString("Enter asset tag > ");
+	        String recipientName = Helper.readString("Enter recipient name > ");
+	        int contactNumber = Helper.readInt("Enter contact number > ");
+	        String description = Helper.readString("Enter description > ");
+	        String status = "Pending";
+
+	        return new Request(assetTag, recipientName, status, contactNumber, description);
+	    }
+
+	    public static void addRequest(ArrayList<Request> requestList, Request request) {
+	        requestList.add(request);
+	        System.out.println("Request added successfully.");
+	    }
+
+	    // ================================= Option 15 (Remove Requests)================================
+	    public static boolean removeRequest(ArrayList<Request> requestList, String assetTag) {
+	        for (int i = 0; i < requestList.size(); i++) {
+	            Request request = requestList.get(i);
+	            if (request.getAssetTag().equalsIgnoreCase(assetTag)) {
+	                requestList.remove(i);
+	                return true;
+	            }
+	        }
+	        return false;
+	    }
+
+	    public static void removeRequestMenu(ArrayList<Request> requestList) {
+	        String assetTag = Helper.readString("Enter asset tag of the request to remove > ");
+	        boolean isRemoved = removeRequest(requestList, assetTag);
+
+	        if (isRemoved) {
+	            System.out.println("Request removed successfully.");
+	        } else {
+	            System.out.println("Request not found or unable to remove.");
+	        }
+	    }
+	}
+
 
 //version 3
