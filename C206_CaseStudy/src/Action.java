@@ -1,9 +1,14 @@
+//Sharul Iman
+
 public class Action extends RenovationServices {
     
     private String recipientName;
-    private boolean status;
+    private String status;
     
-    public Action(String assetTag, String recipientName, boolean status) {
+
+
+    public Action(String assetTag, String recipientName, String status) {
+
         super(assetTag, "","");
         this.recipientName = recipientName;
         this.status = status;
@@ -17,11 +22,11 @@ public class Action extends RenovationServices {
         this.recipientName = recipientName;
     }
     
-    public boolean getStatus() {
+    public String getStatus() {
         return status;
     }
     
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
     
