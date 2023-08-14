@@ -9,61 +9,133 @@ import org.junit.Test;
 
 public class C206_CaseStudyTest {
 	
-	private RenovationServices sa1;
-	private RenovationServices sa2;
+	private ServiceProvider sp1;
+	private ServiceProvider sp2;
+	private ServiceProvider sp3;
+	private User ryan;
+	private User Adriel;
+	private User Nicholas;
 
-
-	private ArrayList<RenovationServices> serviceList;
-
+	private ArrayList<ServiceProvider> ServiceProviderList;
+	private ArrayList<User> UserList;
+	
     @Before
-   public void setUp() {
+   public void setUp() throws Exception {
     	//Set up examples for the test cases.
-        serviceList = new ArrayList<>();
-        serviceList.add(new RenovationServices("Provider1","House Company","09:00 to 18:00","SA1","House Renovation","Specialises in House Renovation",true));
-		serviceList.add(new RenovationServices("Provider2","Lawn Company","05:00 to 18:00","SA2","Lawn Renovation","Specialises in Lawn Renovation",true));
+    	sp1 = new ServiceProvider("Johns House Renos", "09:00 to 18:00");
+        sp2 = new ServiceProvider("Daisy Lawn Renos", "09:00 to 18:00");
+        sp3 = new ServiceProvider("Ara Car Renos", "09:00 to 18:00");
+        ServiceProviderList = new ArrayList<ServiceProvider>();
+        //Set up for User
+        ryan = new User("Ryan","Password123@","ryan@gmail.com");
+        Adriel = new User("Adriel","Password124@","Adriel@gmail.com");
+        Nicholas = new User("Nicholas","Password3454!","Nicholas@gmail.com");
+        UserList = new ArrayList<User>();
+      
+    }
+
+
+    @Test
+	public void testRetrieveAllServiceProvider() {
+		// Test Case 1: View an empty Service Provider list
+		assertNotNull("Test if there is valid Service Provider arraylist to add to", ServiceProviderList);
+		assertEquals("Test that the Service Provider arraylist is empty.", 0, ServiceProviderList.size());
+		String allServiceProvider = C206_CaseStudy.retrieveAllServiceProvider(ServiceProviderList);
+		String testOutput = "";
+		assertEquals("Test that nothing is displayed", testOutput, allServiceProvider);
+
+ 
+
+		// Test Case 2: Add two Service Providers to the list and view the list
+		C206_CaseStudy.addServiceProvider(ServiceProviderList, sp1);
+		C206_CaseStudy.addServiceProvider(ServiceProviderList, sp2);
+		assertEquals("Test that Service Provider arraylist size is 2.", 2, ServiceProviderList.size());
+		allServiceProvider = C206_CaseStudy.retrieveAllServiceProvider(ServiceProviderList);
+		testOutput = String.format("%10s %20s\n", "Johns House Renos", "09:00 to 18:00");
+		testOutput += String.format("%10s %20s\n", "Daisy Lawn Renos", "09:00 to 18:00");
+		assertEquals("Test that the display is correct.", testOutput, allServiceProvider);
+
+	}
+
+    @Test
+    public void testAddServiceProvider() {
+		// Test Case 1: When the Service Provider list is empty, add one item
+		assertNotNull("Test if there is valid Service Provider arraylist to add to", ServiceProviderList);
+		assertEquals("Test that the Service Provider arraylist is empty.", 0, ServiceProviderList.size());
+		C206_CaseStudy.addServiceProvider(ServiceProviderList, sp1);
+		assertEquals("Test that the Service Provider arraylist size is 1.", 1, ServiceProviderList.size());
+
+ 
+
+		// Test Case 2: Add another Service Provider 
+		C206_CaseStudy.addServiceProvider(ServiceProviderList, sp2);
+		assertEquals("Test that the Service Provider arraylist size is now 2.", 2, ServiceProviderList.size());
+		assertSame("Test that Service Provider is added to the end of the list.", sp2, ServiceProviderList.get(1));
+
+ 
+
+		// Test Case 3: Add a Service Provider that already exists in the list
+		C206_CaseStudy.addServiceProvider(ServiceProviderList, sp2);
+		assertEquals("Test that the Service Provider arraylist size is unchange.", 2, ServiceProviderList.size());
+
+ 
+
+	}
+
+
+    @Test
+    public void testDeleteServiceProvider() {
+    	// Test Case 1: Delete a Service Provider
+		C206_CaseStudy.addServiceProvider(ServiceProviderList, sp1);
+		C206_CaseStudy.deleteServiceProvider(ServiceProviderList, sp2.getServiceProvider());
+		assertEquals("Test that the Service Provider arraylist size is now 1.", 1, ServiceProviderList.size());	
+
+        // Test Case 2: Delete a Service Provider that does not exist in the list
+
+		C206_CaseStudy.deleteServiceProvider(ServiceProviderList, "sp4");
+		assertEquals("Test that the Service Provider arraylist size is unchange.", 1, ServiceProviderList.size());        
+
+    }
+    @Test
+	public void testRetrieveAllUsers() {
+		// Test Case 1: View an empty Service Provider list
+		assertNotNull("Test if there is valid Service Provider arraylist to add to", UserList);
+		assertEquals("Test that the Service Provider arraylist is empty.", 0, UserList.size());
+		String allUsers = C206_CaseStudy.retrieveAllUsers(UserList);
+		String testOutput = "";
+		assertEquals("Test that nothing is displayed", testOutput, allUsers);
+
+ 
+
+		// Test Case 2: Add two Service Providers to the list and view the list
+		C206_CaseStudy.addUsers(UserList, ryan);
+		C206_CaseStudy.addUsers(UserList, Adriel);
+		assertEquals("Test that Service Provider arraylist size is 2.", 2, UserList.size());
+		allUsers = C206_CaseStudy.retrieveAllUsers(UserList);
 		
-        
-        serviceList.add(sa1);
-        serviceList.add(sa2);
-    }
+		testOutput = String.format("%-10s %-30s\n","Ryan","ryan@gmail.com" );
+		testOutput += String.format("%-10s %-30s\n","Adriel","Adriel@gmail.com");
+		assertEquals("Test that the display is correct.", testOutput, allUsers);
 
+	}
+    
 
+    
     @Test
-    public void testViewAllServices() {
-        // Create the expected output that is supposed to be printed out
-        String expectedOutput = String.format("%-20s %-40s %-20s %-10s %-20s %-40s %-10s\n", "ASSET TAG", "SERVICE NAME",
-                "SERVICE PROVIDER", "CONTACT HOURS", "SERVICE NAME", "DESCRIPTION", "AVAILABLE");
-        expectedOutput += String.format("%-20s %-40s %-20s %-10s %-20s %-40s %-10s\n", "SA1", "House Renovation", "House Company",
-                "09:00 to 18:00", "House Renovation", "Specialises in House Renovation", "Yes");
-        expectedOutput += String.format("%-20s %-40s %-20s %-10s %-20s %-40s %-10s\n", "SA2", "Lawn Renovation", "Lawn Company",
-                "05:00 to 18:00", "Lawn Renovation", "Specialises in Lawn Renovation", "Yes");
+    public void testDeleteUsers() {
+    	// Test Case 1: Delete User
+		C206_CaseStudy.addUsers(UserList, ryan);
+		C206_CaseStudy.deleteUsers(UserList, ryan.getUsername(),ryan.getPassword());
+		assertEquals("Test that the User arraylist size is now 0.",0, UserList.size());	
 
-        assertEquals(expectedOutput, C206_CaseStudy.retrieveAllServices(serviceList));
+        // Test Case 2: Delete a Service Provider that does not exist in the list
+
+		C206_CaseStudy.deleteUsers(UserList, "Jerry","Password10");
+		assertEquals("Test that the Service Provider arraylist size is unchange.",0, UserList.size());        
+
     }
 
-    @Test
-    public void testAddService() {
-    	//Add a service as an example.
-    	RenovationServices newService = new RenovationServices("Provider3","Bathroom Company","4:00 to 18:00","SA2","Bath Renovation","Specialises in Bathroom Renovation",false);
-
-        C206_CaseStudy.addService(serviceList, newService);
-        //Check if the number of services is now 3, as there was 2 already existing service before the new one was added.
-        assertEquals(3, serviceList.size());
-        //Check if the newly added service is equal to the information that was inputed.
-        assertEquals(newService, serviceList.get(2));
-    }
-
-    @Test
-    public void testDeleteService() {
-    	//Delete a service as an example.
-        boolean isDeleted = C206_CaseStudy.deleteService(serviceList, "SA2");
-        assertTrue(isDeleted);
-        //Check if there is only one service left in the list, as we have deleted 1 out of 2 of the services.
-        assertEquals(1, serviceList.size());
-        //Check if the service is no longer existing.
-        isDeleted = C206_CaseStudy.deleteService(serviceList, "SA2");
-        assertFalse(isDeleted);
-    }
+    
 }
 
 
