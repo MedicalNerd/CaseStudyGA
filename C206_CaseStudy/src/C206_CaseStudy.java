@@ -13,9 +13,13 @@ public class C206_CaseStudy {
 	private static final int OPTION_ADDUSER = 7;
 	private static final int OPTION_VIEWUSERS = 8;
 	private static final int OPTION_DELETEUSERS = 9;
-	private static final int OPTION_VIEW_SERVICEPROVIDER = 10; // ara
-	private static final int OPTION_CREATE_SERVICEPROVIDER = 11;
-	private static final int OPTION_DELETE_SERVICEPROVIDER = 12;
+	
+	//Ara--------------------------------------------------------
+		private static final int OPTION_VIEW_SERVICEPROVIDER = 10;
+		private static final int OPTION_CREATE_SERVICEPROVIDER = 11;
+		private static final int OPTION_DELETE_SERVICEPROVIDER = 12;
+		//-----------------------------------------------------------
+		
 	private static final int OPTION_VIEW_REQUESTS = 13;
 	private static final int OPTION_ADD_REQUESTS = 14;
 	private static final int OPTION_DELETE_REQUESTS = 15;
@@ -127,16 +131,20 @@ public class C206_CaseStudy {
 			} else if (option == OPTION_DELETEUSERS) {
 				doDeleteUser(UserList);
 			} else if (option == OPTION_VIEW_SERVICEPROVIDER) {
+				//Ara
 				// View all services providers currently available.
 				C206_CaseStudy.viewAllServiceProvider(ServiceProviderList);
 
-			} else if (option == OPTION_CREATE_SERVICEPROVIDER) {
+			}else if (option == OPTION_CREATE_SERVICEPROVIDER) {
+				//Ara
 				// Create a service provider.
 				ServiceProvider newServiceProvider = C206_CaseStudy.inputServiceProvider();
-				C206_CaseStudy.addServiceProvider(ServiceProviderList, newServiceProvider);
-			} else if (option == OPTION_DELETE_SERVICEPROVIDER) {
-				C206_CaseStudy.deleteServiceProviderMain(ServiceProviderList);
+	            C206_CaseStudy.addServiceProvider(ServiceProviderList, newServiceProvider);
+			}
+			else if (option == OPTION_DELETE_SERVICEPROVIDER) {
+				//Ara
 				// Delete a service providers.
+				C206_CaseStudy.deleteServiceProviderMain(ServiceProviderList);
 			} else if (option == OPTION_VIEW_REQUESTS) {
 	            viewRequests(requestList);
 	        } else if (option == OPTION_ADD_REQUESTS) {
@@ -659,95 +667,91 @@ public class C206_CaseStudy {
 	    return false;
 	}
 
-	// ================================= Option 10 (View Service Providers)
-		// =================================
+////Ara---------------------------------------------------------------------------------------------------------------------
+	//================================= Option 10 (View Service Providers) =================================
 		public static String retrieveAllServiceProvider(ArrayList<ServiceProvider> ServiceProviderList) {
 			String output = "";
 
-			for (int i = 0; i < ServiceProviderList.size(); i++) {
-				output += String.format("%10s %20s\n", ServiceProviderList.get(i).getServiceProvider(),
-						ServiceProviderList.get(i).getServiceProviderContactHours());
+	 
+
+			for (int i = 0; i < ServiceProviderList.size(); i++)
+			{
+				output += String.format("%-20s %-40s\n", ServiceProviderList.get(i).getServiceProvider(),
+				ServiceProviderList.get(i).getServiceProviderContactHours());
 			}
 			return output;
 		}
 
+	 
+
 		public static void viewAllServiceProvider(ArrayList<ServiceProvider> ServiceProviderList) {
 			C206_CaseStudy.setHeader("SERVICE PROVIDER LIST");
-			String output = String.format("%10s %20s\n", "Service Provider", "Contact Hours");
-			output += retrieveAllServiceProvider(ServiceProviderList);
-			System.out.println(output);
+			String expectedOutput = String.format("%-20s %-40s\n", "SERVICE PROVIDER", "CONTACT HOURS");
+			expectedOutput += retrieveAllServiceProvider(ServiceProviderList);	
+			System.out.println(expectedOutput);
 		}
 
-	 
-
-	 
-
-		// ================================= Option 11 (Add Service Provider)
-		// =================================
-		public static ServiceProvider inputServiceProvider() {
-			String name = Helper.readString("Enter Service Provider name > ");
-			String hours = Helper.readString("Enter contact hours > ");
-			ServiceProvider sp = new ServiceProvider(name, hours);
-			return sp;
-
-		}
-
-		public static void addServiceProvider(ArrayList<ServiceProvider> ServiceProviderList, ServiceProvider sp) {
-			ServiceProvider spro;
-			for (int i = 0; i < ServiceProviderList.size(); i++) {
-				spro = ServiceProviderList.get(i);
-				if (spro.getServiceProvider().equalsIgnoreCase(sp.getServiceProvider())) {
-					System.out.println("Service Provider already exists!");
-					return;
-				}
-
-			}
-			if ((sp.getServiceProvider().isEmpty()) || (sp.getServiceProvider().isEmpty())) {
-				return;
-			}
-			System.out.println("Service Provider is successfully added!");
-			ServiceProviderList.add(sp);
-		}
-
-	 
-
-	 
-
+		//================================= Option 11 (Add Service Provider) =================================
 		
-		// ================================= Option 12 (Delete Service Provider)
-		// =================================
+				public static ServiceProvider inputServiceProvider() {
+					String name = Helper.readString("Enter Service Provider name > ");
+					String hours = Helper.readString("Enter contact hours > ");
+					ServiceProvider sp= new ServiceProvider(name, hours);
+					return sp;	 
 
-		public static void deleteServiceProviderMain(ArrayList<ServiceProvider> ServiceProviderList) {
-			C206_CaseStudy.setHeader("DELETE SERVICE PROVIDER");
-			String spname = Helper.readString("Enter Service Provider Name > ");
-			boolean isDeleted = C206_CaseStudy.deleteServiceProvider(ServiceProviderList, spname);
-			if (isDeleted) {
-				System.out.println("Service Provider deleted successfully!");
-			}
-		}
-
-		public static boolean deleteServiceProvider(ArrayList<ServiceProvider> ServiceProviderList, String spname) {
-			for (int i = 0; i < ServiceProviderList.size(); i++) {
-				ServiceProvider sp = ServiceProviderList.get(i);
-				if (sp.getServiceProvider().equalsIgnoreCase(spname)) {
-					System.out.println(String.format("\n%10s %20s", "Service Provider", "Contact Hours"));
-					System.out.println(String.format("%10s %20s\n", ServiceProviderList.get(i).getServiceProvider(),
-							ServiceProviderList.get(i).getServiceProviderContactHours()));
-					String check = Helper.readString("Are you sure you want to delete service provider? (Y/N) > ");
-					if (check.equalsIgnoreCase("Y")) {
-						ServiceProviderList.remove(i);
-						return true;
-					} else {
-						System.out.println("Service Provider not deleted successfully!");
-					}
-				} else {
-					System.out.println("Invalid Service Provider");
-					break;
 				}
-			}
+				
+				public static void addServiceProvider(ArrayList<ServiceProvider> ServiceProviderList, ServiceProvider sp) {
+					ServiceProvider spro;
+					for(int i = 0; i < ServiceProviderList.size(); i++) {
+						spro = ServiceProviderList.get(i);
+						if (spro.getServiceProvider().equalsIgnoreCase(sp.getServiceProvider()) )
+						{
+							System.out.println("Service Provider already exists!");
+							return;
+						}
 
-			return false;
-		}
+					}
+					if ((sp.getServiceProvider().isEmpty()) || (sp.getServiceProvider().isEmpty()) ) {
+						return;
+					}
+					System.out.println("Service Provider is successfully added!");
+		            ServiceProviderList.add(sp);
+				}	 
+		
+				//================================= Option 12  (Delete Service Provider) =================================
+
+				public static void deleteServiceProviderMain(ArrayList<ServiceProvider>ServiceProviderList) {
+				    C206_CaseStudy.setHeader("DELETE SERVICE PROVIDER");
+				    String spname = Helper.readString("Enter Service Provider Name > ");
+				    boolean isDeleted = C206_CaseStudy.deleteServiceProvider(ServiceProviderList, spname);
+				    if (isDeleted) {
+				        System.out.println("Service Provider deleted successfully!");
+				    } 
+				}
+				public static boolean deleteServiceProvider(ArrayList<ServiceProvider> ServiceProviderList, String spname) {
+				    for (int i = 0; i < ServiceProviderList.size(); i++) {
+				    	ServiceProvider sp = ServiceProviderList.get(i);
+				        if (sp.getServiceProvider().equalsIgnoreCase(spname)) {
+				        	System.out.println(String.format("\n%-20s %-40s","Service Provider","Contact Hours"));
+							System.out.println(String.format("%-20s %-40s\n", ServiceProviderList.get(i).getServiceProvider(),
+									ServiceProviderList.get(i).getServiceProviderContactHours()));
+							String check = Helper.readString("Are you sure you want to delete service provider? (Y/N) > ");
+							if(check.equalsIgnoreCase("Y")) {
+								 ServiceProviderList.remove(i);
+					            return true;
+							 }
+							else {
+						        System.out.println("Service Provider not deleted successfully!");
+						        return false;
+						    }
+				        }
+				    }
+				    System.out.println("Invalid Service Provider");
+				    return false;
+				}
+			
+		//---------------------------------------------------------------------------------------------------------------------
 	
 		// ================================= Option 13  (View Requests) ================================
 	    public static void viewRequests(ArrayList<Request> requestList) {
