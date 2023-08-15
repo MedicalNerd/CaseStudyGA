@@ -307,27 +307,23 @@ public class C206_CaseStudy {
 	// ================================= Option 1 (View Service)
 	// =================================
 		public static String retrieveAllServices(ArrayList<RenovationServices> serviceList) {
-		    StringBuilder output = new StringBuilder();
-		    for (RenovationServices service : serviceList) {
-		        output.append(String.format("%-20s %-40s %-20s %-20s %-40s %-10s%n",
-		                service.getAssetTag(),
-		                service.getServiceProvider(),
-		                service.getServiceName(),
-		                service.getDescription(),
-		                service.getContactHours(),
-		                C206_CaseStudy.showAvailability(service.getAvailability())));
-		    }
-		    return output.toString();
+			String output = String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", "ASSET TAG", "SERVICE PROVIDER",
+					"SERVICE NAME", "DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
+			for (int i = 0; i < serviceList.size(); i++) {
+				RenovationServices service = serviceList.get(i);
+				output += String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", service.getAssetTag(),
+						service.getServiceProvider(), service.getServiceName(), service.getDescription(),
+						service.getContactHours(), C206_CaseStudy.showAvailability(service.getAvailability()));
+			}
+			return output;
 		}
 
+	 
+
 		public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
-		    C206_CaseStudy.setHeader("ALL SERVICES");
-		    StringBuilder output = new StringBuilder();
-		    output.append(String.format("%-20s %-40s %-20s %-20s %-40s %-10s%n",
-		            "ID", "SERVICE PROVIDER", "SERVICE NAME",
-		            "DESCRIPTION", "CONTACT HOURS", "AVAILABLE"));
-		    output.append(retrieveAllServices(serviceList));
-		    System.out.println(output);
+			C206_CaseStudy.setHeader("ALL SERVICES");
+			String output = retrieveAllServices(serviceList);
+			System.out.println(output);
 		}
 
 
@@ -374,45 +370,48 @@ public class C206_CaseStudy {
 
 //================================= Option 4a (View Appointments) =================================
 	public static String retrieveAppointments(ArrayList<Appointment> appointmentList) {
-		String output = "";
+		String output = String.format("%-20s %-20s %-15s %-12s %-12s %-25s\n", "ASSET TAG", "CUSTOMER NAME",
+	            "STATUS", "DATE", "TIME", "SERVICE NAME");
 		for (int i = 0; i < appointmentList.size(); i++) {
 			Appointment appointment = appointmentList.get(i);
-			output += String.format("%-10s %-15s %-7s %-12s %-8s %s%n", appointment.getAssetTag(),
+			output += String.format("%-20s %-20s %-15s %-12s %-12s %-25s\n", appointment.getAssetTag(),
 					appointment.getRecipientName(), appointment.getStatus(), appointment.getDate(),
-					appointment.getTime(), appointment.getServiceName());
+					appointment.getTime(), appointment.getAdditional_details());
 		}
 		return output;
 	}
 
+ 
+
 	public static void viewAppointments(ArrayList<Appointment> appointmentList) {
 		C206_CaseStudy.setHeader("VIEW APPOINTMENTS");
 
-		String output = String.format("%-10s %-15s %-7s %-12s %-8s %s%n", "APPOINTMENT ID", "RECIPIENT", "STATUS",
-				"DATE", "TIME", "SERVICE NAME");
+ 
 
-		output += retrieveAppointments(appointmentList);
+		String output = retrieveAppointments(appointmentList);
 		System.out.println(output);
 	}
+
+ 
 
 //================================= Option 4b (View Quotes) =================================
 
 	public static String retrieveQuotes(ArrayList<Quote> quoteList) {
-		String output = "";
+		String output = String.format("%-10s %-15s %-15s %-15s %-30s\n", "QUOTE ID", "CUSTOMER NAME",
+	            "STATUS", "CONTACT NUMBER", "DESCRIPTION");
 		for (int i = 0; i < quoteList.size(); i++) {
 			Quote quote = quoteList.get(i);
-			output += String.format("%-10s %-15s %-23s %-15d %s%n", quote.getAssetTag(), quote.getRecipientName(),
+			output += String.format("%-10s %-15s %-15s %-15s %-30s\n", quote.getAssetTag(), quote.getRecipientName(),
 					quote.getStatus(), quote.getContactNumber(), quote.getDescription());
 		}
 		return output;
 	}
 
+ 
+
 	public static void viewQuotes(ArrayList<Quote> quoteList) {
 		C206_CaseStudy.setHeader("VIEW QUOTES");
-
-		String output = String.format("%-10s %-15s %-23s %-15s %s%n", "QUOTE ID", "RECIPIENT", "AVAILABILITY",
-				"CONTACT NUMBER", "DESCRIPTION");
-
-		output += retrieveQuotes(quoteList);
+		String output = retrieveQuotes(quoteList);
 		System.out.println(output);
 	}
 

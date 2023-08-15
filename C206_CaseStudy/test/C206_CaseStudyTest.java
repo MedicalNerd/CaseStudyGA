@@ -87,8 +87,8 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testViewAllServices() {
 	    // Create the expected output that is supposed to be printed out
-	    String expectedOutput = String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", "ASSET TAG", "SERVICE PROVIDER",
-	            "SERVICE NAME", "DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
+		String expectedOutput = String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", "ASSET TAG", "SERVICE PROVIDER",
+				"SERVICE NAME", "DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
 	    expectedOutput += String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", "SA1", "Johns House Renos", "House Renovation",
 	            "Specialises in House Renovation", "09:00 to 18:00", "Yes");
 	    expectedOutput += String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", "SA2", "Daisy Lawn Renos", "Lawn Renovation",
@@ -135,12 +135,18 @@ public class C206_CaseStudyTest {
 	    expectedOutput += String.format("%-20s %-20s %-15s %-12s %-12s %-25s\n", "AP2", "Mary", "Pending",
 	            "2023-07-25", "11.00", "Daisy Lawn Renos");
 
+ 
+
 	    // Call the method to retrieve the actual output
 	    String actualOutput = C206_CaseStudy.retrieveAppointments(appointmentList);
+
+ 
 
 	    // Compare the expected and actual outputs
 	    assertEquals(expectedOutput, actualOutput);
 	}
+
+ 
 	
 	@Test
 	public void testAddAppointment() { //Derrick
@@ -188,8 +194,12 @@ public class C206_CaseStudyTest {
 	    expectedOutput += String.format("%-10s %-15s %-15s %-15s %-30s\n", "Q2", "Jane", "Approved", "98765432",
 	            "Lawn renovation quote");
 
+ 
+
 	    // Call the method to retrieve the actual output
 	    String actualOutput = C206_CaseStudy.retrieveQuotes(quoteList);
+
+ 
 
 	    // Compare the expected and actual outputs
 	    assertEquals(expectedOutput, actualOutput);
@@ -224,19 +234,18 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testViewAllRequests() {
 	    // Create the expected output that is supposed to be printed out
-	    String expectedOutput = String.format("%-10s %-15s %-15s %-15s %-30s\n", "REQUEST ID", "CUSTOMER NAME",
-	            "STATUS", "CONTACT NUMBER", "DESCRIPTION");
-	    expectedOutput += String.format("%-10s %-15s %-15s %-15s %-30s\n", "R1", "Alice", "Pending", "123456789",
-	            "Description 1");
-	    expectedOutput += String.format("%-10s %-15s %-15s %-15s %-30s\n", "R2", "Bob", "Pending", "987654321",
-	            "Description 2");
+	    StringBuilder expectedOutput = new StringBuilder();
+	    expectedOutput.append(String.format("%-10s %-15s %-7s %-12d %s%n", "RT1", "Alice", "Pending", 123456789, "Description 1"));
+	    expectedOutput.append(String.format("%-10s %-15s %-7s %-12d %s%n", "RT2", "Bob", "Pending", 987654321, "Description 2"));
+	    expectedOutput.append(String.format("%-10s %-15s %-7s %-12d %s%n", "RT3", "Carol", "Pending", 567890123, "Description 3"));
 
 	    // Call the method to retrieve the actual output
 	    String actualOutput = C206_CaseStudy.retrieveRequests(requestList);
 
 	    // Compare the expected and actual outputs
-	    assertEquals(expectedOutput, actualOutput);
+	    assertEquals(expectedOutput.toString(), actualOutput);
 	}
+
 	@Test
 	public void testAddRequest() {
 	    // Add a request as an example.
