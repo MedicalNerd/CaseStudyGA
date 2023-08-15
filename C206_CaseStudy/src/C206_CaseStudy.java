@@ -125,11 +125,11 @@ public class C206_CaseStudy {
 				}
 
 			} else if (option == OPTION_ADDUSER) {
-				doAddUser(UserList);
+				doAddUser(UserList);//YL
 			} else if (option == OPTION_VIEWUSERS) {
-				viewAllUsers(UserList);
+				viewAllUsers(UserList);//YL
 			} else if (option == OPTION_DELETEUSERS) {
-				doDeleteUser(UserList);
+				doDeleteUser(UserList);//YL
 			} else if (option == OPTION_VIEW_SERVICEPROVIDER) {
 				//Ara
 				// View all services providers currently available.
@@ -162,6 +162,7 @@ public class C206_CaseStudy {
 		}
 
 	}
+
 
 	/**
 	 * @param UserList
