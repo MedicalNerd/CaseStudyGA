@@ -219,7 +219,7 @@ public class C206_CaseStudy {
 	}
 
 	//================================= Option 7  (Add User Validation) =================================//YL
-	
+	//Goh Yoon Long did this
 
 	
 		public static User inputUserAccount() {
@@ -334,6 +334,7 @@ public class C206_CaseStudy {
 		}
 
 	//================================= Option 8 (View User) =================================//YL
+		//Goh Yoon Long did this
 		public static String retrieveAllUsers(ArrayList<User> UserList) {
 			String output = "";
 
@@ -390,6 +391,7 @@ public class C206_CaseStudy {
 		}
 
 	//================================= Option 9 (Delete User) =================================//YL
+		//Goh Yoon Long did this 
 		public static void deleteUsersMain(ArrayList<User>UserList) {
 		    C206_CaseStudy.setHeader("DELETE USERS");
 		    String username = Helper.readString("Enter Username > ");
@@ -417,31 +419,51 @@ public class C206_CaseStudy {
 		        String username2 = doGetUsername(user);
 				if (doIgnoreCase(username, username2)) {
 		        	if(doGetPassword(user).equals(password)) {
-		        	System.out.println(String.format("%-10s %-20s","Username","Email"));
-					System.out.println(String.format("%-10s %10s\n", doGetUsername(user2),
-							doGetEmail(user2)));
+		        	System.out.println(String.format("%5s %7s %28s %13s","Username","Email","Contact Number","Address"));
+					System.out.println(String.format("%-10s %-19s %-20s %-10s\n", doGetUsername(user2),
+							doGetEmail(user2),doGetContact(user2),doGetAddress(user2)));
 					String check = Helper.readString("Are you sure you want to delete this User? (Y/N) > ");
 					if(check.equalsIgnoreCase("Y")) {
 						 UserList.remove(i);
-			            return true;
+						 return true;
 					 }
-					else {
+					else if (check.equalsIgnoreCase("N")) {
 				        System.out.println("User not deleted successfully!");
 				    }
 		        }
 		        	else {
 		        		System.out.println("Invalid Password!");
+		        		break;
+		        		
 		        	}
-		        }
-		        else
+		       }
+		      else
 		        {
 		        	System.out.println("Invalid Username!");
 					break;
-		        }
+		       }
 		    }//checks username in the list
 
 		    return false;
 		}//for statement
+
+
+		/**
+		 * @param user2
+		 * @return
+		 */
+		private static String doGetContact(User user2) {
+			return user2.getContact();
+		}
+
+
+		/**
+		 * @param user2
+		 * @return
+		 */
+		private static String doGetAddress(User user2) {
+			return user2.getAddress();
+		}
 
 		/**
 		 * @param user2
@@ -470,6 +492,7 @@ public class C206_CaseStudy {
 
 	// ================================= Option 1 (View Service)
 	// =================================
+		//Sharul did this 
 		public static String retrieveAllServices(ArrayList<RenovationServices> serviceList) {
 			String output = String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", "SERVICE ID", "SERVICE PROVIDER",
 					"SERVICE NAME", "DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
@@ -492,6 +515,7 @@ public class C206_CaseStudy {
 
 
 // ==================================== Option 2 (Add Service) ======================================
+		//Sharul did this 
 	public static RenovationServices inputService() {
 		String assetTag = Helper.readString("Enter ServiceID > ");
 		String serviceProvider = Helper.readString("Enter service provider > ");
@@ -510,6 +534,7 @@ public class C206_CaseStudy {
 
 	// ================================= Option 3 (Delete Service)
 	// =================================
+	//Sharul did this 
 	public static void deleteServiceMenu(ArrayList<RenovationServices> serviceList) {
 		C206_CaseStudy.setHeader("DELETE SERVICE");
 		String assetTag = Helper.readString("Enter asset tag of the service to delete > ");
@@ -533,6 +558,7 @@ public class C206_CaseStudy {
 	}
 
 //================================= Option 4a (View Appointments) =================================
+	//Derrick did this
 	public static String retrieveAppointments(ArrayList<Appointment> appointmentList) {
 		String output = String.format("%-20s %-20s %-15s %-12s %-12s %-25s\n", "APPOINTMENT ID", "CUSTOMER NAME",
 	            "STATUS", "DATE", "TIME", "SERVICE NAME");
@@ -559,7 +585,7 @@ public class C206_CaseStudy {
  
 
 //================================= Option 4b (View Quotes) =================================
-
+	//Harith did this 
 	public static String retrieveQuotes(ArrayList<Quote> quoteList) {
 		String output = String.format("%-10s %-15s %-15s %-15s %-30s\n", "QUOTE ID", "CUSTOMER NAME",
 	            "STATUS", "CONTACT NUMBER", "DESCRIPTION");
@@ -580,6 +606,7 @@ public class C206_CaseStudy {
 	}
 
 	// ================================= Option 5a (Add Appointment) ======================================
+	//Derrick did this
 	public static Appointment inputAppointment() {
 		String assertTag = Helper.readString("Enter ID > ");
 		String recipientName = Helper.readString("Enter recipient name > ");
@@ -610,7 +637,7 @@ public class C206_CaseStudy {
 		System.out.println("Appointment added");
 	}
 	// ================================= Option 5b (Add Quote)===========================================
-
+	//Harith did this 
 	public static Quote inputQuote() {
 	    String assetTag = Helper.readString("Enter asset tag > ");
 	    String recipientName = Helper.readString("Enter recipient name > ");
@@ -641,7 +668,7 @@ public class C206_CaseStudy {
 	}
 
 	// ================================= Option 6a (Delete Appointment) =================================
-
+		//Derrick did this
 	public static boolean deleteAppointment(ArrayList<Appointment> appointmentList, String assetTag) {
 		for (int i = 0; i < appointmentList.size(); i++) {
 			Appointment appointment = appointmentList.get(i);
@@ -665,7 +692,7 @@ public class C206_CaseStudy {
 	}
 
 	// ================================= Option 6b (Delete Quote) ==========================================
-	
+	//Harith did this 
 	public static void deleteQuoteMenu(ArrayList<Quote> quoteList) {
 	    String assetTag = Helper.readString("Enter asset tag of the quote to delete > ");
 	    boolean isDeleted = deleteQuote(quoteList, assetTag);
@@ -713,7 +740,7 @@ public class C206_CaseStudy {
 			System.out.println(expectedOutput);
 		}
 
-		//================================= Option 11 (Add Service Provider) =================================
+//ARA		//================================= Option 11 (Add Service Provider) =================================
 		
 				public static ServiceProvider inputServiceProvider() {
 					String name = Helper.readString("Enter Service Provider name > ");
@@ -741,7 +768,7 @@ public class C206_CaseStudy {
 		            ServiceProviderList.add(sp);
 				}	 
 		
-				//================================= Option 12  (Delete Service Provider) =================================
+	//ARA			//================================= Option 12  (Delete Service Provider) =================================
 
 				public static void deleteServiceProviderMain(ArrayList<ServiceProvider>ServiceProviderList) {
 				    C206_CaseStudy.setHeader("DELETE SERVICE PROVIDER");
@@ -776,6 +803,7 @@ public class C206_CaseStudy {
 		//---------------------------------------------------------------------------------------------------------------------
 	
 		// ================================= Option 13  (View Requests) ================================
+				//Sharul did this 
 	    public static void viewRequests(ArrayList<Request> requestList) {
 	        setHeader("VIEW REQUESTS");
 
@@ -797,6 +825,7 @@ public class C206_CaseStudy {
 	    }
 
 	    // ================================= Option 14 (Add Requests) ==================================
+	  //Sharul did this 
 	    public static Request inputRequest() {
 	        String assetTag = Helper.readString("Enter asset tag > ");
 	        String recipientName = Helper.readString("Enter recipient name > ");
@@ -813,6 +842,7 @@ public class C206_CaseStudy {
 	    }
 
 	    // ================================= Option 15 (Remove Requests)================================
+	  //Sharul did this 
 	    public static boolean removeRequest(ArrayList<Request> requestList, String assetTag) {
 	        for (int i = 0; i < requestList.size(); i++) {
 	            Request request = requestList.get(i);
