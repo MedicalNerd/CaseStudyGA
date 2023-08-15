@@ -163,7 +163,7 @@ public class C206_CaseStudyTest {
 		
 		Appointment ap_missing = new Appointment("AP3", "", "Pending", "2023-07-26", "11.00", "Johns House Renos");
 		C206_CaseStudy.createAppointment(appointmentList, ap_missing);
-		assertEquals("Test that the Chromebook arraylist size is unchange.", 3, appointmentList.size());
+		assertEquals("Test that the Appointment arraylist size is unchange.", 3, appointmentList.size());
 		
 		
 	}
