@@ -9,6 +9,7 @@ public class Appointment extends Action {
 		  this.time = time;
 		  this.additional_details = additional_details;  
 		}
+	
 
 		public String getDate() {
 		  return date;

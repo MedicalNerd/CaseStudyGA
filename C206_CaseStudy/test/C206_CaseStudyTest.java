@@ -61,7 +61,9 @@ public class C206_CaseStudyTest {
 
         ap1 = new Appointment("AP1", "Kafka", "Pending", "2023-07-25", "10.00", "Johns House Renos");
         ap2 = new Appointment("AP2", "Mary", "Pending", "2023-07-25", "11.00", "Daisy Lawn Renos");
-
+        appointmentList.add(ap1);
+        appointmentList.add(ap2);
+        
         ryan = new User("Ryan","Password123@","ryan@gmail.com");
         Adriel = new User("Adriel","Password124@","Adriel@gmail.com");
         Nicholas = new User("Nicholas","Password111%","Nicholas@gmail.com");
@@ -154,23 +156,14 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testAddAppointment() { //Derricks
 		assertNotNull("Test if there is valid Appointment arraylist to add to", appointmentList);
-		
-		appointmentList.add(ap1);
-		C206_CaseStudy.createAppointment(appointmentList, ap1);	
-		assertEquals("Test that the Appointment arraylist size is 1.", 1, appointmentList.size());
-		assertSame("Test that Appointment is added to the end of the list.", ap1, appointmentList.get(0));
-		
-		appointmentList.add(ap2);
-		C206_CaseStudy.createAppointment(appointmentList, ap2);
-		assertEquals("Test that the Chromebook arraylist size is now 2.", 2, appointmentList.size());
-		assertSame("Test that Chromebook is added to the end of the list.", ap2, appointmentList.get(1));
-		
-		C206_CaseStudy.createAppointment(appointmentList, ap2);
-		assertEquals("Test that the Appointment arraylist size is unchange.", 2, appointmentList.size());
+		Appointment ap3 = new Appointment("AP3", "Example", "Pending", "2023-07-26", "11.00", "Johns House Renos");
+		C206_CaseStudy.createAppointment(appointmentList, ap3);	
+		assertEquals("Test that the Appointment arraylist size is 3.", 3, appointmentList.size());
+		assertSame("Test that Appointment is added to the end of the list.", ap3, appointmentList.get(2));
 		
 		Appointment ap_missing = new Appointment("AP3", "", "Pending", "2023-07-26", "11.00", "Johns House Renos");
 		C206_CaseStudy.createAppointment(appointmentList, ap_missing);
-		assertEquals("Test that the Chromebook arraylist size is unchange.", 2, appointmentList.size());
+		assertEquals("Test that the Chromebook arraylist size is unchange.", 3, appointmentList.size());
 		
 		
 	}

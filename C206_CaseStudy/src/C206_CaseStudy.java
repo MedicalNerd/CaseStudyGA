@@ -425,20 +425,19 @@ public class C206_CaseStudy {
 
 	// ================================= Option 5a (Add Appointment) ======================================
 	public static Appointment inputAppointment() {
-		String assertTag = Helper.readString("Enter assert tag > ");
+		String assertTag = Helper.readString("Enter ID > ");
 		String recipientName = Helper.readString("Enter recipient name > ");
 		String date = Helper.readString("Enter appointment date > ");
 		String time = Helper.readString("Enter appointment time > ");
-		String serviceName = Helper.readString("Enter service name > ");
+		String serviceName = Helper.readString("Enter additional details > ");
 		String status = "Pending";
-
-		return new Appointment(assertTag, recipientName, status, date, time, serviceName);
+		Appointment appointment = new Appointment(assertTag, recipientName, status, date, time, serviceName);
+		return appointment;
 
 	}
 
 	public static void createAppointment(ArrayList<Appointment> appointmentList, Appointment appointment) {
-		// Check for missing details
-		if (appointment.getServiceName().isEmpty() || appointment.getRecipientName().isEmpty()
+		if (appointment.getAdditional_details().isEmpty() || appointment.getRecipientName().isEmpty()
 				|| appointment.getDate().isEmpty() || appointment.getTime().isEmpty()) {
 			System.out.println("Appointment details are missing. Appointment not added.");
 			return;
