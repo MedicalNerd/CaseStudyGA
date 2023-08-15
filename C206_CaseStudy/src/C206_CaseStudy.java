@@ -306,24 +306,30 @@ public class C206_CaseStudy {
 
 	// ================================= Option 1 (View Service)
 	// =================================
-	public static String retrieveAllServices(ArrayList<RenovationServices> serviceList) {
-		String output = "";
-		for (int i = 0; i < serviceList.size(); i++) {
-			RenovationServices service = serviceList.get(i);
-			output += String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", service.getAssetTag(),
-					service.getServiceProvider(), service.getServiceName(), service.getDescription(),
-					service.getContactHours(), C206_CaseStudy.showAvailability(service.getAvailability()));
+		public static String retrieveAllServices(ArrayList<RenovationServices> serviceList) {
+		    StringBuilder output = new StringBuilder();
+		    for (RenovationServices service : serviceList) {
+		        output.append(String.format("%-20s %-40s %-20s %-20s %-40s %-10s%n",
+		                service.getAssetTag(),
+		                service.getServiceProvider(),
+		                service.getServiceName(),
+		                service.getDescription(),
+		                service.getContactHours(),
+		                C206_CaseStudy.showAvailability(service.getAvailability())));
+		    }
+		    return output.toString();
 		}
-		return output;
-	}
 
-	public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
-		C206_CaseStudy.setHeader("ALL SERVICES");
-		String output = String.format("%-20s %-40s %-20s %-20s %-40s %-10s\\n", "ASSET TAG", "SERVICE PROVIDER",
-				"SERVICE NAME", "DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
-		output += retrieveAllServices(serviceList);
-		System.out.println(output);
-	}
+		public static void viewAllServices(ArrayList<RenovationServices> serviceList) {
+		    C206_CaseStudy.setHeader("ALL SERVICES");
+		    StringBuilder output = new StringBuilder();
+		    output.append(String.format("%-20s %-40s %-20s %-20s %-40s %-10s%n",
+		            "ID", "SERVICE PROVIDER", "SERVICE NAME",
+		            "DESCRIPTION", "CONTACT HOURS", "AVAILABLE"));
+		    output.append(retrieveAllServices(serviceList));
+		    System.out.println(output);
+		}
+
 
 // ==================================== Option 2 (Add Service) ======================================
 	public static RenovationServices inputService() {
