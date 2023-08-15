@@ -64,9 +64,9 @@ public class C206_CaseStudyTest {
         appointmentList.add(ap1);
         appointmentList.add(ap2);
         
-        ryan = new User("Ryan","Password123@","ryan@gmail.com");
-        Adriel = new User("Adriel","Password124@","Adriel@gmail.com");
-        Nicholas = new User("Nicholas","Password111%","Nicholas@gmail.com");
+        ryan = new User("Ryan","Password123@","ryan@gmail.com","90939203","Alexander Road");
+        Adriel = new User("Adriel","Password124@","Adriel@gmail.com","91119203","Upper Thomson Road");
+        Nicholas = new User("Nicholas","Password111%","Nicholas@gmail.com","92139203","Mary Road");
 
         q1 = new Quote("Q1", "John", "Approved", 12345678, "House renovation quote");
         q2 = new Quote("Q2", "Jane", "Approved", 98765432, "Lawn renovation quote");
@@ -352,8 +352,8 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that Service Provider arraylist size is 2.", 2, UserList.size());
 		allUsers = C206_CaseStudy.retrieveAllUsers(UserList);
 		
-		testOutput = String.format("%-10s %-30s\n","Ryan","ryan@gmail.com" );
-		testOutput += String.format("%-10s %-30s\n","Adriel","Adriel@gmail.com");
+		testOutput = String.format("%-10s %-30s %-20s %-10s\n","Ryan","ryan@gmail.com","90939203","Alexander Road");
+		testOutput += String.format("%-10s %-30s %-20s %-10s\n","Adriel","Adriel@gmail.com","91119203","Upper Thomson Road");
 		assertEquals("Test that the display is correct.", testOutput, allUsers);
 
 	}

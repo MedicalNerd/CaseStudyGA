@@ -42,9 +42,9 @@ public class C206_CaseStudy {
 				"Specialises in Lawn Renovation", "08:00 to 18:00", true));
 		ServiceProviderList.add(new ServiceProvider("Johns House Renos", "09:00 to 18:00"));
 		ServiceProviderList.add(new ServiceProvider("Daisy Lawn Renos", "08:00 to 18:00"));
-		UserList.add(new User("Tom", "Password12@", "Tom@gmail.com"));
-		UserList.add(new User("Mary", "Password@12", "Mary@gmail.com"));
-		UserList.add(new User("Kafka", "YES123@oo", "Mommy@gmail.com"));
+		UserList.add(new User("Tom", "Password12@", "Tom@gmail.com","99329098","Senja Road"));
+		UserList.add(new User("Mary", "Password@12", "Mary@gmail.com","99429098","Jurong East"));
+		UserList.add(new User("Kafka", "YES123@oo", "Mommy@gmail.com","93329098","Woodlands Road"));
 		appointmentList.add(new Appointment("AP1", "Kafka", "Pending", "2023-07-25", "10.00", "Johns House Renos"));
 		appointmentList.add(new Appointment("AP2", "Mary", "Pending", "2023-07-25", "11.00", "Daisy Lawn Renos"));
 		quoteList.add(new Quote("Q1", "John", "Approved", 12345678, "House renovation quote"));
@@ -226,6 +226,8 @@ public class C206_CaseStudy {
 			String username = Helper.readString("Enter username here >");
 			String password = Helper.readString("Enter password here >");
 			String email = Helper.readString("Enter email here >");
+			String number = Helper.readString("Enter Contact Number >");
+			String address = Helper.readString("Enter your address >");
 			String regex = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-zA-Z])|(?=.{8,})(?=.*\\d)(?=.*[!@#$%^&])|(?=.{8,})(?=.*[a-zA-Z])(?=.*[!@#$%^&]).*$";// Check
 																																				// if
 																																				// password
@@ -235,7 +237,7 @@ public class C206_CaseStudy {
 			String regex1 = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";// To Check Email format is correct
 			boolean validPassword = doPasswordValidation(password, regex);
 			boolean validEmail = doEmailValidation(email, regex1);
-			User user = new User(username, password, email);
+			User user = new User(username, password, email,number,address);
 			return user;
 
 		}
@@ -337,10 +339,30 @@ public class C206_CaseStudy {
 
 			int size = UserList.size();
 			for (int i = 0; i < size; i++) {
-				output += String.format("%-10s %-30s\n", doGetUsername(UserList, i), doGetEmail(UserList, i));
+				output += String.format("%-10s %-30s %-20s %-10s\n", doGetUsername(UserList, i), doGetEmail(UserList, i),doGetContact(UserList, i),doGetAddress(UserList, i));
 			}
 			return output;
 		}
+
+
+		/**
+		 * @param UserList
+		 * @param i
+		 * @return
+		 */
+		private static String doGetAddress(ArrayList<User> UserList, int i) {
+			return UserList.get(i).getAddress();
+		}
+
+
+	/**
+	 * @param UserList
+	 * @param i
+	 * @return
+	 */
+	private static String doGetContact(ArrayList<User> UserList, int i) {
+		return UserList.get(i).getContact();
+	}
 
 		/**
 		 * @param UserList
@@ -362,7 +384,7 @@ public class C206_CaseStudy {
 
 		public static void viewAllUsers(ArrayList<User> UserList) {
 			C206_CaseStudy.setHeader("USERS LIST");
-			String output = String.format("%5s %15s\n", "Username", "Email Address");
+			String output = String.format("%5s %15s %31s %13s\n", "Username", "Email Address","Contact Number","Address");
 			output += retrieveAllUsers(UserList);
 			System.out.println(output);
 		}

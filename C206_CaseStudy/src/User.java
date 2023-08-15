@@ -41,15 +41,39 @@ public class User {
 	private String password;
 
 	private String email;
+	
+	private String contact;
+	
+	private String address;
 
-	public User(String username,String password,String email){
+	public User(String username,String password,String email,String contact,String address){
 
 		this.username = username;
 
 		this.password = password;
 
 		this.email = email;
+		
+		this.contact = contact;
+		
+		this.address = address;
 
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String toString() {
