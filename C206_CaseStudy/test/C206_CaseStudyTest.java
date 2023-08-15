@@ -92,7 +92,7 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testViewAllServices() {
 	    // Create the expected output that is supposed to be printed out
-		String expectedOutput = String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", "ASSET TAG", "SERVICE PROVIDER",
+		String expectedOutput = String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", "SERVICE ID", "SERVICE PROVIDER",
 				"SERVICE NAME", "DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
 	    expectedOutput += String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", "SA1", "Johns House Renos", "House Renovation",
 	            "Specialises in House Renovation", "09:00 to 18:00", "Yes");
@@ -133,7 +133,7 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testViewAllAppointments() {
 	    // Create the expected output that is supposed to be printed out
-	    String expectedOutput = String.format("%-20s %-20s %-15s %-12s %-12s %-25s\n", "ASSET TAG", "CUSTOMER NAME",
+	    String expectedOutput = String.format("%-20s %-20s %-15s %-12s %-12s %-25s\n", "APPOINTMENT ID", "CUSTOMER NAME",
 	            "STATUS", "DATE", "TIME", "SERVICE NAME");
 	    expectedOutput += String.format("%-20s %-20s %-15s %-12s %-12s %-25s\n", "AP1", "Kafka", "Pending",
 	            "2023-07-25", "10.00", "Johns House Renos");
