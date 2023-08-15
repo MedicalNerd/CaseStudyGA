@@ -141,7 +141,6 @@ public class C206_CaseStudyTest {
 	    // Compare the expected and actual outputs
 	    assertEquals(expectedOutput, actualOutput);
 	}
-
 	
 	@Test
 	public void testAddAppointment() { //Derrick
@@ -238,7 +237,6 @@ public class C206_CaseStudyTest {
 	    // Compare the expected and actual outputs
 	    assertEquals(expectedOutput, actualOutput);
 	}
-
 	@Test
 	public void testAddRequest() {
 	    // Add a request as an example.
