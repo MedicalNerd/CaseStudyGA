@@ -471,7 +471,7 @@ public class C206_CaseStudy {
 	// ================================= Option 1 (View Service)
 	// =================================
 		public static String retrieveAllServices(ArrayList<RenovationServices> serviceList) {
-			String output = String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", "ASSET TAG", "SERVICE PROVIDER",
+			String output = String.format("%-20s %-40s %-20s %-20s %-40s %-10s\n", "SERVICE ID", "SERVICE PROVIDER",
 					"SERVICE NAME", "DESCRIPTION", "CONTACT HOURS", "AVAILABLE");
 			for (int i = 0; i < serviceList.size(); i++) {
 				RenovationServices service = serviceList.get(i);
@@ -534,7 +534,7 @@ public class C206_CaseStudy {
 
 //================================= Option 4a (View Appointments) =================================
 	public static String retrieveAppointments(ArrayList<Appointment> appointmentList) {
-		String output = String.format("%-20s %-20s %-15s %-12s %-12s %-25s\n", "ASSET TAG", "CUSTOMER NAME",
+		String output = String.format("%-20s %-20s %-15s %-12s %-12s %-25s\n", "APPOINTMENT ID", "CUSTOMER NAME",
 	            "STATUS", "DATE", "TIME", "SERVICE NAME");
 		for (int i = 0; i < appointmentList.size(); i++) {
 			Appointment appointment = appointmentList.get(i);
@@ -836,4 +836,4 @@ public class C206_CaseStudy {
 	    }
 	}
 
-//Final version
+//Final version!
