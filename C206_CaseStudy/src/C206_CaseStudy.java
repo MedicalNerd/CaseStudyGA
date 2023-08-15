@@ -230,7 +230,7 @@ public class C206_CaseStudy {
 					return;
 				}
 				else if(validPassword==false) {
-					System.out.println("Passowrd format is Wrong!");
+					System.out.println("Password format is Wrong!");
 					return;
 				}
 				else if(validEmail==false) {
