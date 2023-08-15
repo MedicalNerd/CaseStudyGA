@@ -121,12 +121,11 @@ public class C206_CaseStudy {
 				}
 
 			} else if (option == OPTION_ADDUSER) {
-				User user =inputUserAccount();
-				addUsers(UserList,user);
+				doAddUser(UserList);
 			} else if (option == OPTION_VIEWUSERS) {
 				viewAllUsers(UserList);
 			} else if (option == OPTION_DELETEUSERS) {
-				C206_CaseStudy.deleteUsersMain(UserList);
+				doDeleteUser(UserList);
 			} else if (option == OPTION_VIEW_SERVICEPROVIDER) {
 				// View all services providers currently available.
 				C206_CaseStudy.viewAllServiceProvider(ServiceProviderList);
@@ -154,6 +153,21 @@ public class C206_CaseStudy {
 
 		}
 
+	}
+
+	/**
+	 * @param UserList
+	 */
+	private static void doDeleteUser(ArrayList<User> UserList) {
+		C206_CaseStudy.deleteUsersMain(UserList);
+	}
+
+	/**
+	 * @param UserList
+	 */
+	private static void doAddUser(ArrayList<User> UserList) {
+		User user =inputUserAccount();
+		addUsers(UserList,user);
 	}
 
 	public static void menu() {
@@ -210,22 +224,41 @@ public class C206_CaseStudy {
 																																				// is
 																																				// right
 			String regex1 = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";// To Check Email format is correct
-			boolean validPassword = password.matches(regex);
-			boolean validEmail = email.matches(regex1);
+			boolean validPassword = doPasswordValidation(password, regex);
+			boolean validEmail = doEmailValidation(email, regex1);
 			User user = new User(username, password, email);
 			return user;
 
+		}
+
+		/**
+		 * @param password
+		 * @param regex
+		 * @return
+		 */
+		private static boolean doPasswordValidation(String password, String regex) {
+			return password.matches(regex);
+		}
+
+		/**
+		 * @param email
+		 * @param regex1
+		 * @return
+		 */
+		private static boolean doEmailValidation(String email, String regex1) {
+			return email.matches(regex1);
 		}
 		public static void addUsers(ArrayList<User> UserList, User user) {
 			User users;
 			String regex = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-zA-Z])|(?=.{8,})(?=.*\\d)(?=.*[!@#$%^&])|(?=.{8,})(?=.*[a-zA-Z])(?=.*[!@#$%^&]).*$";// Check
 			String regex1 = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";// To Check Email format is correct
-			boolean validPassword = user.getPassword().matches(regex);
-			boolean validEmail = user.getEmail().matches(regex1);
+			boolean validPassword = doPasswordValidation(user, regex);
+			boolean validEmail = doEmailValidation(user, regex1);
 		
-			for (int i = 0; i < UserList.size(); i++) {
+			int size = UserList.size();
+			for (int i = 0; i < size; i++) {
 				users = UserList.get(i);
-				if (users.getUsername().equalsIgnoreCase(user.getUsername())) {
+				if (doCheckUsername(user, users)) {
 					System.out.println("User already exists!");
 					return;
 				}
@@ -239,21 +272,83 @@ public class C206_CaseStudy {
 				}
 
 			}
-			if ((user.getUsername().isEmpty()) || (user.getUsername().isEmpty())) {
+			if (doCheckIfEmpty(user) || doCheckIfEmpty(user)) {
 				return;
 			}
 			System.out.println("User is successfully added!");
 			UserList.add(user);
 		}
 
+		/**
+		 * @param user
+		 * @return
+		 */
+		private static boolean doCheckIfEmpty(User user) {
+			return doGetUsername(user).isEmpty();
+		}
+
+		/**
+		 * @param user
+		 * @param users
+		 * @return
+		 */
+		private static boolean doCheckUsername(User user, User users) {
+			return doGetUsername(users).equalsIgnoreCase(doGetUsername(user));
+		}
+
+		/**
+		 * @param user
+		 * @param regex1
+		 * @return
+		 */
+		private static boolean doEmailValidation(User user, String regex1) {
+			return doGetEmail(user).matches(regex1);
+		}
+
+		/**
+		 * @param user
+		 * @param regex
+		 * @return
+		 */
+		private static boolean doPasswordValidation(User user, String regex) {
+			return doGetPassword(user).matches(regex);
+		}
+
+		/**
+		 * @param user
+		 * @return
+		 */
+		private static String doGetPassword(User user) {
+			return user.getPassword();
+		}
+
 	//================================= Option 8 (View User) =================================//YL
 		public static String retrieveAllUsers(ArrayList<User> UserList) {
 			String output = "";
 
-			for (int i = 0; i < UserList.size(); i++) {
-				output += String.format("%-10s %-30s\n", UserList.get(i).getUsername(), UserList.get(i).getEmail());
+			int size = UserList.size();
+			for (int i = 0; i < size; i++) {
+				output += String.format("%-10s %-30s\n", doGetUsername(UserList, i), doGetEmail(UserList, i));
 			}
 			return output;
+		}
+
+		/**
+		 * @param UserList
+		 * @param i
+		 * @return
+		 */
+		private static String doGetEmail(ArrayList<User> UserList, int i) {
+			return UserList.get(i).getEmail();
+		}
+
+		/**
+		 * @param UserList
+		 * @param i
+		 * @return
+		 */
+		private static String doGetUsername(ArrayList<User> UserList, int i) {
+			return UserList.get(i).getUsername();
 		}
 
 		public static void viewAllUsers(ArrayList<User> UserList) {
@@ -268,19 +363,32 @@ public class C206_CaseStudy {
 		    C206_CaseStudy.setHeader("DELETE USERS");
 		    String username = Helper.readString("Enter Username > ");
 		    String password = Helper.readString("Enter password > ");
-		    boolean delete = C206_CaseStudy.deleteUsers(UserList, username , password);
+		    boolean delete = doDeleteUser(UserList, username, password);
 		    if (delete) {
 		        System.out.println("User deleted successfully!");
 		    } 
 		}
+
+		/**
+		 * @param UserList
+		 * @param username
+		 * @param password
+		 * @return
+		 */
+		private static boolean doDeleteUser(ArrayList<User> UserList, String username, String password) {
+			return C206_CaseStudy.deleteUsers(UserList, username , password);
+		}
 		public static boolean deleteUsers(ArrayList<User> UserList, String username, String password) {
-		    for (int i = 0; i < UserList.size(); i++) {
-		    	User user = UserList.get(i);
-		        if (user.getUsername().equalsIgnoreCase(username)) {
-		        	if(user.getPassword().equals(password)) {
+		    int size = UserList.size();
+			for (int i = 0; i < size; i++) {
+		    	User user2 = UserList.get(i);
+				User user = user2;
+		        String username2 = doGetUsername(user);
+				if (doIgnoreCase(username, username2)) {
+		        	if(doGetPassword(user).equals(password)) {
 		        	System.out.println(String.format("%-10s %-20s","Username","Email"));
-					System.out.println(String.format("%-10s %10s\n", UserList.get(i).getUsername(),
-							UserList.get(i).getEmail()));
+					System.out.println(String.format("%-10s %10s\n", doGetUsername(user2),
+							doGetEmail(user2)));
 					String check = Helper.readString("Are you sure you want to delete this User? (Y/N) > ");
 					if(check.equalsIgnoreCase("Y")) {
 						 UserList.remove(i);
@@ -303,6 +411,31 @@ public class C206_CaseStudy {
 
 		    return false;
 		}//for statement
+
+		/**
+		 * @param user2
+		 * @return
+		 */
+		private static String doGetEmail(User user2) {
+			return user2.getEmail();
+		}
+
+		/**
+		 * @param user2
+		 * @return
+		 */
+		private static String doGetUsername(User user2) {
+			return user2.getUsername();
+		}
+
+		/**
+		 * @param username
+		 * @param username2
+		 * @return
+		 */
+		private static boolean doIgnoreCase(String username, String username2) {
+			return username2.equalsIgnoreCase(username);
+		}
 
 	// ================================= Option 1 (View Service)
 	// =================================
