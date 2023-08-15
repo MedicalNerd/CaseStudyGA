@@ -154,7 +154,7 @@ public class C206_CaseStudyTest {
  
 	
 	@Test
-	public void testAddAppointment() { //Derrick
+	public void testAddAppointment() { //Derricks
 		assertNotNull("Test if there is valid Appointment arraylist to add to", appointmentList);
 		
 		appointmentList.add(ap1);
