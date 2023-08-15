@@ -61,8 +61,6 @@ public class C206_CaseStudyTest {
 
         ap1 = new Appointment("AP1", "Kafka", "Pending", "2023-07-25", "10.00", "Johns House Renos");
         ap2 = new Appointment("AP2", "Mary", "Pending", "2023-07-25", "11.00", "Daisy Lawn Renos");
-        appointmentList.add(ap1);
-        appointmentList.add(ap2);
 
         ryan = new User("Ryan","Password123@","ryan@gmail.com");
         Adriel = new User("Adriel","Password124@","Adriel@gmail.com");
